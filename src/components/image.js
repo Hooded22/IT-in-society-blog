@@ -18,7 +18,7 @@ const Image = (props) => {
     query {
       placeholderImage: file(relativePath: { eq: "gatsby-astronaut.png" }) {
         childImageSharp {
-          fluid(maxWidth: 300) {
+          fluid(maxWidth: 400, maxHeight: 250) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -33,7 +33,7 @@ const Image = (props) => {
     }
   `)
 
-  return <Img style = {{width: '100px', heigth: '100px'}} fluid={data[props.name].childImageSharp.fluid} />
+  return <Img imgStyle = {props.imgStyle} style = {props.wrapperStyle} fluid={data[props.name].childImageSharp.fluid} />
 }
 
 export default Image
