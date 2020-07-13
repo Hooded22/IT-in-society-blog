@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Romanesco&display=swap');
+
+/* AUTHOR CARD */
+
+.authorCard
+{
+    margin-bottom: 1.45rem;
+    width: 80%;
+    height: auto;
+    display: flex;
+    margin: 0 auto;
+}
+
+.authorCard .leftSide
+{
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0;
+    width: 20%;
+    margin-right: 20px;
+}
+
+.authorCard .rigthSide
+{
+    width: 80%;
+    justify-content: center;
+    align-items: flex-start;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.authorCard .rigthSide h1
+{
+    font-size: 24px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.authorCard .rigthSide h2
+{
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.authorCard .rigthSide h3
+{
+    font-size: 24px;
+    margin-top: 20px;
+    font-family: 'Romanesco', cursive;
+    font-weight: normal;
+    color: #166363
+}
+
+
+.authorCard .socialIconBar
+{
+    width: 40%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 755px)
+{
+    .authorCard {
+        flex-direction: column;
+    }
+
+    .authorCard .leftSide
+    {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .authorCard .rigthSide
+    {
+        width: 100%;
+        align-items: center;
+    }
+}
+
+/* CATEGORIES */
+
+.categories
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.categories .item
+{
+    width: 33%;
+    display: inline-flex;
+    background-position: center;
+    background-size: cover;
+    align-items: center;
+    cursor: pointer;
+    height: 177px;
+    text-decoration: none;
+}
+
+.categories .item:nth-child(1)
+{
+    background-image: url("../images/Stories-image-edited.jpg");
+}
+.categories .item:nth-child(2)
+{
+    background-image: url("../images/Algorythms-edited.jpg");
+}
+.categories .item:nth-child(3)
+{
+    background-image: url("../images/Lifestyle-edited.jpg");
+}
+
+.categories .item:hover h1
+{
+    opacity: 1;
+}
+
+.categories .item h1
+{
+    width: 50%;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    margin-top: 20px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    transition: opacity .3s ease-in-out;
+}
+
+@media screen and (max-width: 755px)
+{
+    .categories
+    {
+        flex-direction: column;
+    }
+
+    .categories .item
+    {
+        width: 100%;
+    }
+}
+
+/* POSTS LIST */
+
+.postsList
+{
+    width: 80%;
+    display: inline-flex;
+    align-content: flex-start;
+    flex-direction: column;
+    margin-top: 1.45rem;
+}
+
+.post
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+}
+
+.postsList .imageSection
+{
+    width: 50%;
+    display: inline-flex;
+}
+
+.postsList .imageSection img
+{
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: center;
+}
+
+.postsList .contentSection
+{
+    margin-left: 24px;
+    width: calc(50% - 24px);
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.postsList .post .header
+{
+    width: 80%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgba(22,99,99,0.4);
+}
+
+.postsList .post .shortContent
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.postsList .post .footer
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}

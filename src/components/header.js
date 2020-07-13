@@ -1,7 +1,8 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import '../css/header.css';
+
+import '../css/navbar.css';
 
 const pagesList = [
   {
