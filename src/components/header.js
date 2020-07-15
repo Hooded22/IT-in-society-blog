@@ -29,7 +29,7 @@ const pagesList = [
 
 const NavBarItems = (props) => {
   return props.data.map((page) => (
-    <li className = "navbarItem"><Link to = {page.link} className = "navbarLink">{page.name}</Link></li>
+    <li key = {page.name} className = "navbarItem"><Link to = {page.link} className = "navbarLink">{page.name}</Link></li>
   ))
 }
 

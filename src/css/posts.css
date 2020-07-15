@@ -1,0 +1,194 @@
+/* POSTS LIST */
+
+.postsList
+{
+    width: 65%;
+    display: inline-flex;
+    align-content: flex-start;
+    flex-direction: column;
+    margin-top: 1.45rem;
+}
+
+.post
+{
+    width: 100%;
+    min-height: 328px;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    margin-bottom: 50px;
+    color: black;
+    text-decoration: none;
+}
+
+.postsList .imageSection
+{
+    width: 50%;
+    display: inline-flex;
+}
+
+.postsList .imageSection img
+{
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   object-fit: cover;
+   object-position: center;
+}
+
+.postsList .contentSection
+{
+    margin-left: 24px;
+    width: calc(50% - 24px);
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.postsList .post .header
+{
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgba(22,99,99,0.4);
+}
+
+.postsList .post .header h2
+{
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 10px 0;
+    margin: 0;
+    color: #166363
+}
+
+.postsList .post .header h1
+{
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0 0 10px 0;
+    margin: 0;
+}
+
+.postsList .post .header h3
+{
+    text-align: center;
+    font-weight: 100;
+    font-size: 12px;
+    padding: 0 0 10px 0;
+    margin: 0;
+}
+
+.postsList .post .content
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.postsList .post .content p
+{
+    width: 100%;
+    text-align: justify;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+}
+
+.postsList .post .content i
+{
+    width: 100%;
+    text-align: justify;
+    font-size: 24px;
+    color: #166363;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.postsList .post .footer
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid rgba(000,000,000,0.13);
+    position: absolute;
+    bottom: 0;
+}
+
+.postsList .post .footer .comments
+{
+    width: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.postsList .post .footer .comments p
+{
+   margin: 0;
+   padding: 0;
+}
+
+.postsList .post .footer .share
+{
+    width: 90%;
+}
+
+.postsList .post .footer .share h4
+{
+    margin-bottom: 0;
+    text-align: right;
+    width: 20%;
+    margin: 0;
+    display: inline-flex;
+    margin-left: 40%;
+}
+
+.postsList .postReverse
+{
+    flex-direction: row-reverse;
+}
+
+.postsList .contentSectionReverse
+{
+    margin-right: 24px;
+    margin-left: 0;
+    width: calc(50% - 24px);
+    display: inline-flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 755px)
+{
+    .postsList
+    {
+        width: 100%;
+    }
+
+    .postsList .post, .post.reverse
+    {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .postsList .post .imageSection, .postsList .post .contentSection, .contentSection.reverse
+    {
+        width: 100%;
+        margin: 0;
+    }
+}

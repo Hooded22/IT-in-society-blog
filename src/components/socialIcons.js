@@ -29,15 +29,18 @@ const SocialIcons = (props) => {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-around',
+            alignItems: "center",
         },
     
     }
 
+    const data = props.data == null ? socialIconList : props.data;
+
 return(
-    <div class = "container" style = {styles.container}>
+    <div className = "container" style = {props.style == null ? styles.container : props.style}>
         {
-            socialIconList.map(iconObj => (
-                <a href = {iconObj.link} target = "blank">{iconObj.icon}</a>
+            data.map((iconObj,index) => (
+                <a key = {index} href = {iconObj.link} target = "blank">{iconObj.icon}</a>
             ))
         }
     </div>
