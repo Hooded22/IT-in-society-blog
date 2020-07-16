@@ -9,10 +9,11 @@ import {SERVER_ADRESS} from "../env/server_variables.env";
 
 const Categories = (props) => {
     const [postList, setPostList] = useState([]);
+    
     useEffect(() => {
         const CATEGORY_NAME = props.type;
         getPostByCategory(CATEGORY_NAME);
-    },[]);
+    },[props.type]);
     
     async function getPostByCategory(category)
     {

@@ -32,12 +32,14 @@ function createPostList(postJSON)
             let postObject = {
                 id: post.id,
                 title: post.Title,
-                content:  post.short_content,
+                short_content:  post.short_content,
+                content: post.Content,
                 date: post.Date,
                 category:  post.category?.category_name,
                 image:  SERVER_ADRESS + post.Image[0].url,
             }
             newPostList.unshift(postObject);
+            return 0;
         })
         return newPostList;
     }
@@ -46,7 +48,7 @@ const Post = (props) => {
     return(
         <Link className = {props.reverse ? "post postReverse" : "post"} to = {`/app/blogpost/${props.id}`}>
                 <div className = "imageSection">
-                    <img src = {props.image}/>
+                    <img src = {props.image} alt = "Post"/>
                 </div>
                 <div className = {props.reverse ? "contentSection contentSectionReverse" : "contentSection"}>
                     <div className = "header">
@@ -55,7 +57,7 @@ const Post = (props) => {
                         <h3>{props.date}</h3>
                     </div>
                     <div className = "content">
-                        <p>{props.content}</p>
+                        <p>{props.short_content}</p>
                         <i>...</i>
                     </div>
                     <div className = "footer">
@@ -96,12 +98,12 @@ const PostList = (props) => {
                             id = {index}
                             key = {post.id}
                             title = {post.title}
-                            content = {post.content}
+                            short_content = {post.short_content}
                             image = {post.image}
                             date = {post.date}
                             category = {post.category}
                             comments = {1}
-                            reverse = {index % 2 == 0 ? true : false}
+                            reverse = {index % 2 === 0 ? true : false}
                         />
                     )
                 })
@@ -122,9 +124,8 @@ const DefaulPostList = () => {
         {
             const jsonData = await axios.get(`http://localhost:1337/posts`);
             const newPostList = createPostList(jsonData);
-            if(newPostList != postList)
+            if(newPostList !== postList)
             {
-                console.log(newPostList, postList);
                 setPostList(newPostList);
                 localStorage.setItem("posts",JSON.stringify(newPostList));
             }

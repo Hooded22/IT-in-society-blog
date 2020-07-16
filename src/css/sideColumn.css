@@ -47,6 +47,7 @@
     height: 48px;
     padding: 0 10px;
     font-size: 15px;
+    width: 100%;
 }
 
 .sideColumn .newsletter input::placeholder
@@ -61,6 +62,7 @@
 
 .sideColumn .newsletter button
 {
+    width: 100%;
     height: 48px;
     background-color: #166363;
     font-size: 15px;
@@ -92,7 +94,7 @@
     padding: 0;
 }
 
-.sideColumn .categories ul li
+.sideColumn .categories ul .link
 {
     list-style-type: none;
     height: 40px;
@@ -101,9 +103,14 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     line-height: 35px;
     cursor: pointer;
+    width: 100%;
+    display: flex;
+    margin-bottom: calc(1.45rem / 2);
+    color: black;
+    text-decoration: none;
 }
 
-.sideColumn .categories ul li span
+.sideColumn .categories ul .link span
 {
     color: rgba(22,99,99,0.4);
 }
@@ -168,22 +175,25 @@
     line-height: 100%;
 }
 
-.sideColumn .latestPosts ul li
+.sideColumn .latestPosts ul .link
 {
     display: flex;
     justify-content: space-around;
     flex-direction: row;
     width: 100%;
+    margin-bottom: calc(1.45rem / 2);
+    color: black;
+    text-decoration: none;
 }
 
-.sideColumn .latestPosts ul li img
+.sideColumn .latestPosts ul .link img
 {
     width: 70px;
     height: 70px;
     display: inline-flex;
 }
 
-.sideColumn .latestPosts ul li .content
+.sideColumn .latestPosts ul .link .content
 {
     width: 80%;
     margin-left: 20px;
@@ -192,7 +202,7 @@
     align-items: flex-start;
 }
 
-.sideColumn .latestPosts ul li h3
+.sideColumn .latestPosts ul .link h3
 {
     font-size: 13px;
     color: rgba(22,99,99,0.4);
@@ -201,7 +211,7 @@
     font-weight: normal;
 }
 
-.sideColumn .latestPosts ul li h2
+.sideColumn .latestPosts ul .link h2
 {
     font-size: 18px;
     padding-top: 8px;

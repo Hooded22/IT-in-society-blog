@@ -33,7 +33,7 @@ const BlogPost = (props) => {
                         <h1>{CHOOSES_POST.title}</h1>
                         <h3>{CHOOSES_POST.date}</h3>
                     </div>
-                   <img src = {CHOOSES_POST.image}/>
+                   <img src = {CHOOSES_POST.image} alt = "Blogpost"/>
                    <p>{CHOOSES_POST.content}</p>
                 </div>
                 <SideColumn/>

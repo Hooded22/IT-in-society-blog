@@ -1,18 +1,79 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 import bannerImage from '../images/banner2.png';
 import {FaSearch} from "react-icons/fa";
 import SocialIcons from './socialIcons';
+import adminAccount from "../env/adminAccount";
+import { SERVER_ADRESS } from '../env/server_variables.env';
+import {Link, useStaticQuery, graphql} from 'gatsby';
 
 import "../css/sideColumn.css"
 
+
 const NewsLetter = () => {
+    const [tokenState, setStateToken] = useState("");
+    const [emailState, setStateEmail] = useState("");
+
+    useEffect(() => {
+        getToken();
+    },[])
+
+    async function getToken()
+    {
+        try {
+            const adminData = await adminAccount();
+            const token = await adminData.data.jwt;
+            setStateToken(token);
+        } catch (error) {
+            
+        }
+    }
+
+    function handleSubmit(event)
+    {
+        event.preventDefault();
+        addNewUserEmail();
+    }
+
+    function handleChange(event)
+    {
+        setStateEmail(event.target.value);
+    }
+
+    async function addNewUserEmail()
+    {
+        try {
+            await fetch(`${SERVER_ADRESS}/emails`,{
+                method: "POST",
+                body:JSON.stringify(
+                    {
+                        user_email: emailState
+                    }
+                ),
+                headers:
+                {
+                    "Authorization": `Bearer ${tokenState}`
+                }
+            }).then(data => console.log(data));
+            setStateEmail("");
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    
     return(
         <div className = "newsletter wrapper">
             <h1>NewsLetter</h1>
-            <input className = "emailInput" type = "email" name = "Enter your e-mail"  placeholder = "Your email adress"/>
-            <button className = "sendEmailButton">
-                Sign Up
-            </button>
+            <form onSubmit = {handleSubmit}>
+                <input className = "emailInput" type = "email" name = "Newsletter_email"  placeholder = "Your email adress"
+                    onChange = {handleChange}
+                    value = {emailState}
+                />
+                <button className = "sendEmailButton" type = "submit">
+                    Sign Up
+                </button>
+            </form>
         </div>
     )
 }
@@ -21,19 +82,41 @@ const Banner = () => {
     return(
         <div className = "banner wrapper">
             <h1>Banner</h1>
-            <img src = {bannerImage}/>
+            <img src = {bannerImage} alt = ""/>
         </div>
     )
 }
 
 const Categories = () => {
+    const [categorieState, setStateCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios(`${SERVER_ADRESS}/categories`);
+            setStateCategories(result.data);
+        }
+
+        fetchData();
+    },[]);
+
+    function firstLetterUpper(str)
+    {
+        const string = str.slice(0);
+        const bigLetter = string.charAt(0).toUpperCase();
+        return bigLetter + string.slice(1);
+    }
+
     return(
     <div className = "categories wrapper">
         <h1>Categories</h1>
         <ul>
-            <li>Stories <span>(1)</span></li>
-            <li>Algos <span>(5)</span></li>
-            <li>Lifestyle <span>(2)</span></li> 
+           {
+               categorieState.map((item) => {
+                return(
+                     <Link className = "link" key = {item.id} to = {`/app/categories/${item.category_name}`}>{firstLetterUpper(item.category_name)} <span>({item.posts.length})</span></Link>
+                )
+               })
+           }
         </ul>
     </div>
     )
@@ -73,33 +156,44 @@ const Search = () => {
 }
 
 const LatestPosts = () => {
+    const [posts,setPosts] = useState(JSON.parse(localStorage.getItem('posts')).slice(0,3));
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem('posts'));
+        if(data !== posts)
+        {
+            const POSTS = [...data].slice(0,3);
+            setPosts(POSTS);
+            console.log(POSTS,posts);
+        }
+    },[localStorage.getItem('posts')])
+
 
     const Post = (props) => (
-        <li>
-            <img src = "https://noemi.px-lab.com/personal-view/wp-content/uploads/sites/2/2016/05/50-380x250.png"/> 
+        <Link className = "link" to = {`/app/blogpost/${props.id}`}>
+            <img src = {props.image} alt = ""/> 
             <div className = "content">
-                <h3>{props.data}</h3>
+                <h3>{props.date}</h3>
                 <h2>{props.title}</h2>
             </div>
-        </li>
+        </Link>
     )
 
     return(
         <div className = "latestPosts wrapper">
             <h1>Latest posts</h1>
             <ul>
-               <Post
-                data = "9 may 2020"
-                title = "Title"
-               />
-                <Post
-                data = "9 may 2020"
-                title = "Title"
-               />
-                <Post
-                data = "9 may 2020"
-                title = "Title"
-               />
+               {
+                   posts.map((post,index) => {
+                       return(
+                           <Post
+                            id = {index}
+                            date = {post.date}
+                            title = {post.title}
+                            image = {post.image}
+                           />
+                       )
+                   })
+               }
             </ul>
         </div>
     )
