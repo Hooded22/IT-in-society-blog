@@ -15,11 +15,17 @@ const BlogPost = (props) => {
     const RenderTags = () => {
         const result = [];
         const tags = CHOOSES_POST.tags;
-        tags.map(tag => {
-            result.push(<Link className = "tag" to = {`/app/tagpage/${tag.tag_name}`}>{tag.tag_name}</Link>)
+        tags.map((tag,index) => {
+            result.push(<Link key = {index} className = "tag" to = {`/app/tagpage/${tag.tag_name}`}>{tag.tag_name}</Link>)
         });
 
         return result;
+    }
+
+    const StringToHtml = (string) => {
+        return (
+            <div  dangerouslySetInnerHTML={{__html: string}}/>
+           )
     }
 
     return(
@@ -36,7 +42,7 @@ const BlogPost = (props) => {
                         </div>
                         <div className = "content">
                             <img src = {CHOOSES_POST.image} alt = "Blogpost"/>
-                            <p>{CHOOSES_POST.content}</p>
+                            {StringToHtml(CHOOSES_POST.content)}
                         </div>
                         <div className = "footer">
                             <ul>

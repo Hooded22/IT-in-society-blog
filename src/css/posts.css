@@ -34,6 +34,13 @@
    margin: 0;
    object-fit: cover;
    object-position: center;
+   filter: grayscale(0.7);
+   transition: all .3s linear;
+}
+
+.postsList .post:hover .imageSection img
+{
+    filter: grayscale(0);
 }
 
 .postsList .contentSection

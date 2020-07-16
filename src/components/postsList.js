@@ -28,6 +28,7 @@ function createPostList(postJSON)
     {
         const POST_LIST = postJSON.data;
         const newPostList = [];
+        console.log(POST_LIST);
         POST_LIST.map(post => {
             let postObject = {
                 id: post.id,
