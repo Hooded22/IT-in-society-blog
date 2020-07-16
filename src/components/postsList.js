@@ -46,21 +46,25 @@ function createPostList(postJSON)
     }
 
 const Post = (props) => {
+    const linkDestination = `/app/blogpost/${props.id}`
+    const linkStyle = {color: "black", textDecoration: "none"}
     return(
-        <Link className = {props.reverse ? "post postReverse" : "post"} to = {`/app/blogpost/${props.id}`}>
-                <div className = "imageSection">
+        <div className = {props.reverse ? "post postReverse" : "post"}  >
+                <Link className = "imageSection" to = {linkDestination} >
                     <img src = {props.image} alt = "Post"/>
-                </div>
+                </Link>
                 <div className = {props.reverse ? "contentSection contentSectionReverse" : "contentSection"}>
-                    <div className = "header">
-                        <h2>{props.category}</h2>
-                        <h1>{props.title}</h1>
-                        <h3>{props.date}</h3>
-                    </div>
-                    <div className = "content">
-                        <p>{props.short_content}</p>
-                        <i>...</i>
-                    </div>
+                    <Link to = {linkDestination} style = {linkStyle}>
+                        <div className = "header">
+                            <h2>{props.category}</h2>
+                            <h1>{props.title}</h1>
+                            <h3>{props.date}</h3>
+                        </div>
+                        <div className = "content">
+                            <p>{props.short_content}</p>
+                            <i>...</i>
+                        </div>
+                    </Link>
                     <div className = "footer">
                         <div className = "comments">
                             <FiMessageCircle/>
@@ -80,7 +84,7 @@ const Post = (props) => {
                         </div>
                     </div>
                 </div>
-            </Link>
+            </div>
     )
 }
 

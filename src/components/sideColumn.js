@@ -4,15 +4,15 @@ import axios from 'axios';
 import bannerImage from '../images/banner2.png';
 import {FaSearch} from "react-icons/fa";
 import SocialIcons from './socialIcons';
-import adminAccount from "../env/adminAccount";
+import {password, login} from "../env/adminAccount";
 import { SERVER_ADRESS } from '../env/server_variables.env';
-import {Link, useStaticQuery, graphql} from 'gatsby';
+import {Link} from 'gatsby';
 
 import "../css/sideColumn.css"
 
 
 const NewsLetter = () => {
-    const [tokenState, setStateToken] = useState("");
+    const [token, setStateToken] = useState("");
     const [emailState, setStateEmail] = useState("");
 
     useEffect(() => {
@@ -22,18 +22,27 @@ const NewsLetter = () => {
     async function getToken()
     {
         try {
-            const adminData = await adminAccount();
-            const token = await adminData.data.jwt;
+            const admin = await axios.post(`${SERVER_ADRESS}/auth/local`,{
+                identifier: login,
+                password: password
+            });
+            const token = await admin.data.jwt;
             setStateToken(token);
         } catch (error) {
             
         }
     }
 
-    function handleSubmit(event)
+    async function handleSubmit(event)
     {
         event.preventDefault();
-        addNewUserEmail();
+        try {
+            await getToken();
+            addNewUserEmail();
+        } catch (error) {
+            console.error(error);
+        }
+        
     }
 
     function handleChange(event)
@@ -53,7 +62,7 @@ const NewsLetter = () => {
                 ),
                 headers:
                 {
-                    "Authorization": `Bearer ${tokenState}`
+                    "Authorization": `Bearer ${token}`
                 }
             }).then(data => console.log(data));
             setStateEmail("");
@@ -141,13 +150,12 @@ const Tags = () => {
     const RenderTagList = () => {
         const tagArray = [];
         const tagCopy = [...tags];
-        tagCopy.map(tag => {
-            tagArray.push(<Link className = "tagLink" to = {`/app/tagpage/${tag.tag_name}`} >{tag.tag_name}</Link>);
+        tagCopy.map((tag,index) => {
+            tagArray.push(<Link key = {index} className = "tagLink" to = {`/app/tagpage/${tag.tag_name}`} >{tag.tag_name}</Link>);
         });
 
         return tagArray;
     } 
-    console.log("TAGS: ",tags);
     return(
         <div className = "tags wrapper">
             <h1>Tags</h1>
@@ -187,7 +195,7 @@ const LatestPosts = () => {
 
 
     const Post = (props) => (
-        <Link key = {props.key} className = "link" to = {`/app/blogpost/${props.id}`}>
+        <Link className = "link" to = {`/app/blogpost/${props.id}`}>
             <img src = {props.image} alt = "" loading = "lazy"/> 
             <div className = "content">
                 <h3>{props.date}</h3>

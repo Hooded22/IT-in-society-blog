@@ -30,6 +30,7 @@ const SocialIcons = (props) => {
             flexDirection: 'row',
             justifyContent: 'space-around',
             alignItems: "center",
+            pointerEvents: "none"
         },
     
     }

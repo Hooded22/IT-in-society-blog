@@ -71,6 +71,12 @@
     width: 100%;
 }
 
+.blogpost .container .postColumn .singlePost p
+{
+    text-align: justify;
+
+}
+
 
 .blogpost .container .postColumn .singlePost .footer
 {
@@ -110,4 +116,12 @@
 .blogpost .container .postColumn .singlePost .footer .tag:hover
 {
     filter: brightness(0.9);
+}
+
+@media screen and (max-width: 755px)
+{
+    .blogpost .container .postColumn
+    {
+        width: 100%;
+    }
 }

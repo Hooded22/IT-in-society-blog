@@ -48,10 +48,7 @@
     margin: 0 auto;
     position: relative;
 }
-
-
-
-.navbarItem
+.navbarContainer .navbarItem
 {
     display: inline-block;
     margin: 0;
@@ -61,24 +58,24 @@
     position: relative;
 }
 
-.navbarItem:hover .navbarLink
+.navbarContainer .navbarItem:hover .navbarLink
 {
     color: #166363
 }
 
-.navbarItem:hover::before
+.navbarContainer .navbarItem:hover::before
 {
     width: 80%;
 }
 
-.navbarLink
+.navbarContainer .navbarLink
 {
     color: black;
     text-decoration: none;
     
 }
 
-.navbarItem::before
+.navbarContainer .navbarItem::before
 {
     content: "";
     margin: 0 auto;
@@ -88,4 +85,102 @@
     position: absolute;
     top: 100%;
     left: 10%;
+}
+
+/* MOBILE VERSION */
+
+.navbarMobileMenuIcon
+{
+    display: none;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    align-items: flex-end;
+    position: relative;
+}
+
+.navbarMobileMenuIcon .icon
+{
+    position: absolute;
+    right: 20px;
+}
+
+.navbarMobileContainer
+{
+    position: fixed;
+    flex-direction: row;
+    width: 100vw;
+    height: 200vh;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    background-color: rgba(000,000,000,0.7);
+}
+
+.navbarMobileContent
+{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    top: 0;
+    margin-left: 100%;
+    background-color: #fff;
+    transition: all .4s linear;
+}
+
+.navbarMobileContent.show
+{
+    margin-left: 40%;
+}
+
+.navbarMobileContent .header
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: #166363;
+}
+
+.navbarMobileContent .content
+{
+   margin: 0 auto;
+   margin-top: 20px;
+   width: 90%;
+}
+
+.navbarMobileContent .content ul
+{
+    list-style-type: none;
+    margin: 0;
+}
+
+.navbarMobileContent .content li
+{
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.navbarMobileContent .content li .navbarLink
+{
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 755px)
+{
+    .navbarMobileMenuIcon
+    {
+        display: inline-flex;
+    }
+
+    .navbarContainer
+    {
+        display: none;
+    }
 }
