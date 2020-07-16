@@ -8,19 +8,19 @@ import '../css/navbar.css';
 const pagesList = [
   {
     name: "Home",
-    link: '/home'
+    link: '/'
   },
   {
     name: "Stories",
-    link: '/categories/stories'
+    link: '/app/categories/stories'
   },
   {
     name: 'Algo',
-    link: '/categories/algo'
+    link: '/app/categories/algorithms'
   },
   {
     name: 'Lifestyle',
-    link: '/categories/lifestyle'
+    link: '/app/categories/lifestyle'
   },
   {
     name: 'About',

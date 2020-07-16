@@ -4,8 +4,9 @@
 
 .authorCard
 {
+    margin: 0 auto;
     margin-bottom: 60px;
-    width: 90%;
+    width: 70%;
     height: auto;
     display: flex;
 }
