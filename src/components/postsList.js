@@ -37,6 +37,7 @@ function createPostList(postJSON)
                 date: post.Date,
                 category:  post.category?.category_name,
                 image:  SERVER_ADRESS + post.Image[0].url,
+                tags: post.tags
             }
             newPostList.unshift(postObject);
             return 0;

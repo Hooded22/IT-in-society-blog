@@ -123,19 +123,36 @@ const Categories = () => {
 }
 
 const Tags = () => {
+    const [tags,setTags] = useState("");
+
+    useEffect(() => {
+        const getTags = async () => {
+            try {
+                const newTags = await axios(`${SERVER_ADRESS}/tags`);
+                setTags(newTags.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        getTags();
+    },[]);
+
+    const RenderTagList = () => {
+        const tagArray = [];
+        const tagCopy = [...tags];
+        tagCopy.map(tag => {
+            tagArray.push(<Link className = "tagLink" to = {`/app/tagpage/${tag.tag_name}`} >{tag.tag_name}</Link>);
+        });
+
+        return tagArray;
+    } 
+    console.log("TAGS: ",tags);
     return(
         <div className = "tags wrapper">
             <h1>Tags</h1>
             <ul>
-                <li>Grall</li>
-                <li>Structs</li>
-                <li>Books</li>
-                <li>Material Design</li>
-                <li>OOP</li>
-                <li>Love</li>
-                <li>C++</li>
-                <li>Materialism</li>
-                <li>Tag</li>
+               <RenderTagList/>
             </ul>
         </div>
     )
@@ -156,21 +173,22 @@ const Search = () => {
 }
 
 const LatestPosts = () => {
-    const [posts,setPosts] = useState(JSON.parse(localStorage.getItem('posts')).slice(0,3));
+    const [postState,setPosts] = useState(JSON.parse(localStorage.getItem('posts')).slice(0,3));
     useEffect(() => {
-        const data = JSON.parse(localStorage.getItem('posts'));
-        if(data !== posts)
+        const localStoragePosts = localStorage.getItem('posts');
+        const postsCopy = [...postState];
+        const DATA = JSON.parse(localStoragePosts);
+        if(DATA !== postsCopy)
         {
-            const POSTS = [...data].slice(0,3);
-            setPosts(POSTS);
-            console.log(POSTS,posts);
+            const POSTS_TO_SEND = [...DATA].slice(0,3);
+            setPosts(POSTS_TO_SEND);
         }
-    },[localStorage.getItem('posts')])
+    },[])
 
 
     const Post = (props) => (
-        <Link className = "link" to = {`/app/blogpost/${props.id}`}>
-            <img src = {props.image} alt = ""/> 
+        <Link key = {props.key} className = "link" to = {`/app/blogpost/${props.id}`}>
+            <img src = {props.image} alt = "" loading = "lazy"/> 
             <div className = "content">
                 <h3>{props.date}</h3>
                 <h2>{props.title}</h2>
@@ -183,13 +201,14 @@ const LatestPosts = () => {
             <h1>Latest posts</h1>
             <ul>
                {
-                   posts.map((post,index) => {
+                   postState.map((post,index) => {
                        return(
                            <Post
                             id = {index}
                             date = {post.date}
                             title = {post.title}
                             image = {post.image}
+                            key = {index}
                            />
                        )
                    })
