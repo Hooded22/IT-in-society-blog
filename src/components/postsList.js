@@ -26,9 +26,10 @@ const icons = [
 
 function createPostList(postJSON)
     {
-        const POST_LIST = postJSON.data;
+        if(postJSON.data.length == 0 || postJSON == null)
+            return 0;
+        const POST_LIST = postJSON?.data;
         const newPostList = [];
-        console.log(POST_LIST);
         POST_LIST.map(post => {
             let postObject = {
                 id: post.id,
@@ -38,7 +39,8 @@ function createPostList(postJSON)
                 date: post.Date,
                 category:  post.category?.category_name,
                 image:  SERVER_ADRESS + post.Image[0].url,
-                tags: post.tags
+                tags: post.tags,
+                comments: post.comments
             }
             newPostList.unshift(postObject);
             return 0;
@@ -101,7 +103,7 @@ const PostList = (props) => {
                posts.map((post,index) => {
                     return(
                         <Post
-                            id = {index}
+                            id = {post.id}
                             key = {post.id}
                             title = {post.title}
                             short_content = {post.short_content}
@@ -133,7 +135,6 @@ const DefaulPostList = () => {
             if(newPostList !== postList)
             {
                 setPostList(newPostList);
-                localStorage.setItem("posts",JSON.stringify(newPostList));
             }
         } 
         catch (error)

@@ -6,7 +6,7 @@ import {FaSearch} from "react-icons/fa";
 import SocialIcons from './socialIcons';
 import {password, login} from "../env/adminAccount";
 import { SERVER_ADRESS } from '../env/server_variables.env';
-import {Link} from 'gatsby';
+import {Link, navigate} from 'gatsby';
 
 import "../css/sideColumn.css"
 
@@ -148,10 +148,9 @@ const Tags = () => {
     },[]);
 
     const RenderTagList = () => {
-        const tagArray = [];
         const tagCopy = [...tags];
-        tagCopy.map((tag,index) => {
-            tagArray.push(<Link key = {index} className = "tagLink" to = {`/app/tagpage/${tag.tag_name}`} >{tag.tag_name}</Link>);
+        const tagArray = tagCopy.map((tag,index) => {
+            return(<Link key = {index} className = "tagLink" to = {`/app/tagpage/${tag.tag_name}`} >{tag.tag_name}</Link>);
         });
 
         return tagArray;
@@ -167,14 +166,29 @@ const Tags = () => {
 }
 
 const Search = () => {
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const handleChange = (event) => {
+        const value = String(event.target.value);
+        setSearchTerm(value);
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if(searchTerm !== "")
+        {
+            navigate(`/app/searchresult/${searchTerm}`)
+        }
+    }
+
     return (
         <div className = "search wrapper">
             <h1>Search</h1>
             <div>
-                <input type = "text" placeholder = "Search..." />
-                <div className = "iconBox wrapper">
+                <input type = "text" placeholder = "Search..." value = {searchTerm} onChange = {handleChange} />
+                <button className = "iconBox wrapper" type = "submit" onClick = {handleSubmit}>
                     <FaSearch color = "white"/>
-                </div>
+                </button>
             </div>
         </div>
     )
@@ -212,7 +226,7 @@ const LatestPosts = () => {
                    postState.map((post,index) => {
                        return(
                            <Post
-                            id = {index}
+                            id = {post.id}
                             date = {post.date}
                             title = {post.title}
                             image = {post.image}

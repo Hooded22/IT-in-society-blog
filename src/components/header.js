@@ -79,14 +79,14 @@ const Header = ({ siteTitle }) => {
       </div>
       <div className = "navbarMobileContainer" style = {{display: mobileMenuDisplay}}>
         <div className = {`navbarMobileContent ${mobileMenuContentClass}`}>
-            <div className = "header"
+            <button className = "header"
               onClick = {closeMenu}
             >
               <RiCloseLine
                 size = {21}
                 color = "#fff"
               />
-            </div>
+            </button>
             <div className = "content">
               <ul>
                 <NavBarItems data = {pagesList}/>

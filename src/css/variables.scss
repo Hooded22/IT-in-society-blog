@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Romanesco&display=swap');
+@mixin flexBox($direction, $justifyCon, $alignItems, $display : flex, ) {
+    display: $display;
+    flex-direction: $direction;
+    justify-content: $justifyCon;
+    align-items: $alignItems;
+}
+@mixin marginPaddingZero {
+    margin: 0;
+    padding: 0;
+}
+
+$primaryColor : #166363;
+$directionMobile : column;
+$headerSize : 36px;
+$secondFont : 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

@@ -1,0 +1,138 @@
+@import "./variables";
+
+/* AUTHOR CARD */
+
+.authorCard
+{
+    margin: 0 auto;
+    margin-bottom: 60px;
+    width: 70%;
+    height: auto;
+    display: flex;
+    .leftSide
+    {
+        display: block;
+        padding: 0;
+        width: auto;
+        margin-right: 20px;
+    }
+    .rigthSide
+    {
+        width: 80%;
+        h1
+        {
+            font-size: 36px;
+            font-weight: 500;
+            @include marginPaddingZero;
+            text-align: center;
+            width: 100%;
+        }
+        h2
+        {
+            margin-top: 15px;
+            margin-bottom: 0;
+            font-size: 15px;
+            font-weight: normal;
+        }
+        h3
+        {
+            font-size: 24px;
+            margin-top: 20px;
+            font-family: 'Romanesco', cursive;
+            font-weight: normal;
+            color: $primaryColor
+        }
+    }
+    .socialIconBar
+    {
+        width: 40%;
+        height: 50px;
+        @include flexBox(row, space-around, center);
+    }
+}
+
+
+@media screen and (max-width: 755px)
+{
+    .authorCard 
+    {
+        flex-direction: $directionMobile;
+        .leftSide
+        {
+            width: 100%;
+            margin-bottom: 20px;
+            @include flexBox($directionMobile, center, center);
+        }
+        .rigthSide
+        {
+            width: 100%;
+        @include flexBox($directionMobile, center, center);
+        }
+    }
+}
+
+/* CATEGORIES */
+
+.categories
+{
+    @include flexBox(row, space-around, center);
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.categories .item
+{
+    @include flexBox(row, flex-start, center, inline-flex);
+    width: 33%;
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+    height: 200px;
+    text-decoration: none;
+    &:nth-child(1)
+    {
+        background-image: url("../images/Stories-image-edited.jpg");
+    }
+    &:nth-child(2)
+    {
+        background-image: url("../images/Algorythms-edited.jpg");
+    }
+    &:nth-child(3)
+    {
+        background-image: url("../images/Lifestyle-edited.jpg");
+    }
+    h1
+    {
+        @include marginPaddingZero;
+        width: 50%;
+        text-align: center;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+        text-transform: uppercase;
+        opacity: 0.8;
+        transition: opacity .3s ease-in-out;
+    }
+    &:hover h1
+    {
+        opacity: 1;
+    }
+}
+
+
+@media screen and (max-width: 755px)
+{
+    .categories
+    {
+        flex-direction: column;
+        .item
+        {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+
+

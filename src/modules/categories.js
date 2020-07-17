@@ -4,8 +4,8 @@ import axios from 'axios'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PostsList, {createPostList} from '../components/postsList';
-import SideColumn from "../components/sideColumn";
 import {SERVER_ADRESS} from "../env/server_variables.env";
+import PageTemplate from "../components/pageTemplates/headerAndContent";
 
 const Categories = (props) => {
     const [postList, setPostList] = useState([]);
@@ -29,29 +29,10 @@ const Categories = (props) => {
     return(
         <Layout>
             <SEO title="Categories" />
-            <div style = {{
-                display: "flex",
-                flexDirection: 'column',
-            }}>
-                <div style = {{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    width: '100%'
-                }}>
-                     <h1>Hi from the {props.type} page</h1>
-                </div>
-                <div style = {{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    width: '100%',
-                    justifyContent: 'space-around'
-                }}>
-                    <PostsList 
-                        data = {postList}
-                    />
-                    <SideColumn/>
-                </div>
-            </div>
+            <PageTemplate
+                header = {<h1>Hi from the {props.type} page</h1>}
+                content = {<PostsList data = {postList} />}
+            />
         </Layout>
     )
 }

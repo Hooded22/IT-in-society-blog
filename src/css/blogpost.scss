@@ -1,0 +1,319 @@
+@import "./variables";
+
+.blogpost
+{
+    @include flexBox(column, center, flex-end);
+    .container
+    {
+        @include flexBox(row, space-around, flex-start);
+        width: 100%;
+    }
+    .postColumn
+    {
+        @include flexBox(column, center, center, inline-flex);
+        width: 65%;
+        margin-top: 1.45rem;
+    }
+}
+
+.blogpost .singlePost
+{
+    width: 100%;
+    min-height: 1000px;
+    position: relative;
+    .header
+    {
+        @include flexBox(column, center, center);
+        width: 80%;
+        margin: 0 auto;
+        border: 2px solid rgba(22,99,99,0.4);
+        margin-bottom: 30px;
+        padding: 10px 0 10px 0;
+        h2
+        {
+            padding: 0;
+            margin: 10px 0;
+            font-size: 15px;
+            text-transform: uppercase;
+            color: $primaryColor;
+        }
+        h1
+        {
+            @include marginPaddingZero;
+            font-size: 32px;
+        }
+        h3
+        {
+            font-size: 15px;
+            padding: 0;
+            margin: 10px 0;
+            font-weight: 100;
+        }
+    }
+    .content
+    {
+        flex-direction: column;
+        p
+        {
+            text-align: justify;
+        }
+    }
+    img
+    {
+        width: 100%;
+    }
+    .footer
+    {
+        width: 100%;
+        display: flex;
+        border-bottom: 2px solid rgba(000,000,000,0.13);
+        position: absolute;
+        bottom: 0;
+        ul
+        {
+            @include flexBox(row, flex-start, center);
+            flex-wrap: wrap;
+            width: 100%;
+            list-style-type: none;
+            margin: 0;
+        }
+        .tag
+        {
+            width: auto;
+            padding: 4px 10px;
+            font-size: 12px;
+            border: 2px solid #eee;
+            margin: 3px 5px;
+            box-sizing: border-box;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: $secondFont;
+            cursor: pointer;
+            color: black;
+            text-decoration: none;
+            &:hover
+            {
+                filter: brightness(0.9);
+            }
+        }
+    }
+}
+
+.postColumn .share
+{
+    @include flexBox(row, space-around, center);
+    margin: 0 auto;
+    margin-bottom: 60px;
+    width: 40%;
+    p
+    {
+        @include marginPaddingZero;
+        font-size: 15px;
+    }
+}
+
+.commentSection
+{
+    @include flexBox(column, center, flex-start);
+    width: 100%;
+    h3 
+    {
+        font-size: 24px;
+    }
+    ul
+    {
+        @include marginPaddingZero;
+        list-style-type: none;
+        width: 100%;
+        .commentItem
+        {
+            @include marginPaddingZero;
+            width: 100%;
+        }
+    }
+}
+
+.commentSection ul li .comment
+{
+    @include flexBox(row, space-around, flex-start);
+    margin-bottom: 35px;
+    border-bottom: 2px solid rgba(000,000,000,0.13);
+    .profilImage
+    {
+        display: block;
+        img
+        {
+            width: 58px;
+            height: 58px;
+            min-width: 58px;
+            min-height: 58px;
+            border-radius: 50%;
+        }
+    }
+    .contentSection
+    {
+        margin-left: 20px;
+        width: 80%;
+        .header
+        {
+            @include flexBox(row, flex-start, flex-end);
+            h2
+            {
+                @include marginPaddingZero;
+                font-size: 14px;
+                text-transform: uppercase;
+                color: white;
+                padding:3px 8px;
+                background-color: rgba(22,99,99,0.8);
+            }
+            p
+            {
+                font-size: 13px;
+                margin-left: 10px;
+                padding: 0;
+                line-height: 13px;
+            }
+        }
+        .content
+        {
+            min-height: 100px;
+            margin-top: 10px
+        }
+    }
+}
+
+.commentSection form
+{
+    @mixin basicSetup {
+        background-color: rgb(241, 241, 241);
+        border: none;
+        color: black;
+        font-weight: 100;
+        font-size: 14px;
+        outline: none;
+    }
+    @include flexBox(row, space-between, center);
+    flex-wrap: wrap;
+    width: 100%;
+    textarea
+    {
+        @include basicSetup;
+        height: 170px;
+        resize: none;
+        width: 100%;
+        padding: 10px 15px;
+        
+    }
+    input
+    {
+        @include basicSetup;
+        margin-top: 20px;
+        width: 48%;
+        height: 48px;
+        padding: 0px 15px;
+    }
+    div
+    {
+        @include flexBox(row, flex-end, center);
+        width: 100%;
+        margin-top: 20px;
+        button
+        {
+            @include flexBox(row, center, center);
+            border: none;
+            outline: none;
+            width: 40%;
+            height: 48px;
+            background-color: rgba(22,99,99,0.8);
+            color: white;
+            font-size: 18px;
+            text-transform: uppercase;
+            text-align: center;
+            font-family: $secondFont;
+        }
+    }
+}
+
+.postColumn .loginSection
+{
+    @include flexBox(column, center, flex-start);
+    width: 100%;
+    h3
+    {
+        width: 60%;
+        text-align: start;
+        font-size: 18px;
+    }
+    ul
+    {
+        @include flexBox(row, flex-start, center, inline-flex);
+        @include marginPaddingZero;
+        width: 70%;
+        flex-wrap: wrap;
+        list-style-type: none;
+        .loginIcon
+        {
+            @include flexBox(row, center, center, inline-flex);
+            $dimensions : 44px;
+            width: $dimensions;
+            height: $dimensions;
+            min-width: $dimensions;
+            min-height: $dimensions;
+            border-radius: 50%;
+            background-color: $primaryColor;
+            margin-right: 30px;
+            cursor: pointer;
+        }
+        
+    }
+}
+
+
+@media screen and (max-width: 755px)
+{
+    .blogpost .container .postColumn
+    {
+        width: 100%;
+    }
+
+    .blogpost .commentSection .comment .contentSection .header
+    {
+        flex-direction: column;
+        align-items: flex-start;
+        p
+        {
+            margin: 5px 0 0 0;
+        }
+    }
+
+    .postColumn .share
+    {
+        width: 80%;
+    }
+
+    .commentSection form
+    {
+        input
+        {
+            width: 100%;
+        }
+        div
+        {
+            justify-content: flex-start;
+        }
+    }
+}
+
+@media screen and (max-width: 360px)
+{
+    .postColumn .loginSection ul
+    {
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    .postColumn .loginSection ul .loginIcon
+    {
+        margin-right: 0;
+    }
+}

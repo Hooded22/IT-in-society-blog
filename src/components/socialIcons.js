@@ -32,6 +32,11 @@ const SocialIcons = (props) => {
             alignItems: "center",
             pointerEvents: "none"
         },
+        link: {
+            textDecoration: "none",
+            color: "black",
+            cursor: "pointer"
+        }
     
     }
 
@@ -41,7 +46,7 @@ return(
     <div className = "container" style = {props.style == null ? styles.container : props.style}>
         {
             data.map((iconObj,index) => (
-                <a key = {index} href = {iconObj.link} target = "blank">{iconObj.icon}</a>
+                <a key = {index} href = {iconObj.link} style = {styles.link} target = "blank">{iconObj.icon}</a>
             ))
         }
     </div>

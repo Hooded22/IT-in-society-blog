@@ -1,0 +1,19 @@
+@import "../variables";
+
+.pageTemplate
+{
+   .header
+   {
+        @include flexBox(row, flex-start, center,);
+        width: 100%;
+        h1
+        {
+            font-size: $headerSize;
+        }
+   }
+   .content
+   {
+       @include flexBox(row, space-around, flex-start);
+       width: 100%;
+   }
+}

@@ -144,6 +144,8 @@
     align-items: center;
     height: 40px;
     background-color: #166363;
+    border: none;
+    outline: none;
 }
 
 .navbarMobileContent .content
