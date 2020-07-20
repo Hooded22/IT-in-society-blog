@@ -41,7 +41,11 @@ const SearchResult = (props) => {
             <SEO title={`${props.searchTerm} tag page`} />
             <PageTemplate
                 header = {<h1>Search result for: "{props.searchTerm}"</h1>}
-                content = {postList == null ? <EmptySearchResult searchTerm = {props.searchTerm}/> :<PostsList data = {postList}/>} 
+                content = {
+                postList == null 
+                ? <EmptySearchResult searchTerm = {props.searchTerm}/> 
+                : <PostsList data = {postList} pageNumber = {props.pageNumber} link = {`/app/searchresult/${props.searchTerm}/page/`} postsLimit = {3}/>
+            }
             />
         </Layout>
     )

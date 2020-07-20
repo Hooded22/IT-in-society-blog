@@ -10,132 +10,46 @@ import "../css/blogpost.scss";
 import SocialIcons from '../components/socialIcons';
 import {
     FaFacebook,
-    FaInstagram,
+    FaTwitter,
     FaGoogle
 } from 'react-icons/fa'
 import { SERVER_ADRESS, SERVER_URL} from '../env/server_variables.env';
 
-const Comment = (props) => {
-    return(
-        <div className = "comment">
-            <div className = "profilImage">
-                <img src = "http://localhost:1337/uploads/Blog_83cbe207ae.jpeg" alt = "profile"/>
-            </div>
-            <div className = "contentSection">
-                <div className = "header">
-                    <h2>{props.author}</h2>
-                    <p>{props.date}</p>
-                </div>
-                <div className = "content">
-                    <p>{props.content}</p>
-                </div>
-            </div>
-        </div> 
-    )
-}
-
-const CommentSection = (props) => {
-    return(
-        <div className = "commentSection">
-            <h3>{props.data.length || 0} comments</h3>
-            <ul>
-                {
-                    props?.data.map((comment, index) => {
-                        return(
-                            <li key = {index} className = "commentItem">
-                                <Comment 
-                                    author = {comment.user_name}
-                                    date = {comment.date}
-                                    content = {comment.content}
-                                />
-                            </li>
-                        )
-                    })
-                }
-            </ul>
-            <form>
-                <h3>Leave Comment</h3>
-                <textarea placeholder = "Your message"></textarea>
-                <input placeholder = "Your name" type = "text"/>
-                <input placeholder = "Email" type = "email"/>
-                <div>
-                    <button type = "submit">Submit</button>
-                </div>
-            </form>
-        </div>
-    )
-
-}
-
-const LoginSection = (props) => {
-    const icons = [
-        {
-            icon: <FaGoogle size = {21} color = "#fff"/>,
-            name: 'google'
-        },
-        {
-            icon: <FaInstagram size = {21} color = "#fff"/>,
-            name: 'instagram'
-        },
-        {
-            icon: <FaFacebook size = {21} color = "#fff"/>,
-            name: 'facebook'
-        }
-    ]
-
-    const loginHandle = (authName) => {
-        window.sessionStorage.setItem("userLogged",true);
-        localStorage.setItem("currentPost",props.currentPost);
-        window.location = `${SERVER_URL}/connect/${authName}`;
-    }
-
-    return(
-        <div className = "loginSection">
-            <h3>Login by one of below option to leave a comment</h3>
-            <ul>
-                {
-                    icons.map((icon, index) => {
-                        return(<li key = {index} className = "loginIcon" onClick = {() => loginHandle(icon.name)}>{icon.icon}</li>)
-                    })
-                }
-            </ul>
-        </div>
-    )
-}
-
-
 const BlogPost = (props) => {
-    const [userLogged, setUserLogged] = useState(window.sessionStorage.getItem("userLogged") || false);
+    const [userLogged, setUserLogged] = useState(window.sessionStorage.getItem('userLogged') ? true : false);
     const [choosenPost, setChoosenPost] = useState(null);
+    const userData = JSON.parse(window.sessionStorage.getItem("userData"));
+    const user = userData?.user || {};
 
     useEffect(() => {
         const getPost = async (id) => {
             try {
                 const jsonData = await axios(`http://localhost:1337/posts?id=${id}`);
-                console.log(jsonData.data[0])
                 setChoosenPost(jsonData.data[0]);
                    
             } catch (error) {
                 console.log(error);
             }
         }
-        
+
         getPost(props.id);
     },[]);
 
-    const RenderTags = () => {
-        const tags = choosenPost.tags;
-        const result = tags.map((tag,index) => {
-            return(<Link key = {index} className = "tag" to = {`/app/tagpage/${tag.tag_name}`}>{tag.tag_name}</Link>)
-        });
+    const StringToHtml = (string) => <div  dangerouslySetInnerHTML={{__html: string}}/>
 
-        return result;
+    const logoutHandle = () =>
+    {
+        window.sessionStorage.removeItem('userLogged');
+        window.sessionStorage.removeItem('token');
+        window.sessionStorage.removeItem("userData");
+        setUserLogged(false);
+        console.log("Loging out");
     }
 
-    const StringToHtml = (string) => {
-        return (
-            <div  dangerouslySetInnerHTML={{__html: string}}/>
-           )
+    const loginHandle = (authName) => {
+        window.sessionStorage.setItem("provider",authName);
+        window.sessionStorage.setItem("currentPost",choosenPost.id);
+        window.location = `${SERVER_URL}/connect/${authName}`;
     }
 
     if(choosenPost == null)
@@ -161,7 +75,7 @@ const BlogPost = (props) => {
                         </div>
                         <div className = "footer">
                             <ul>
-                                <RenderTags/>
+                                <RenderTags tags = {choosenPost.tags}/>
                             </ul>
                         </div>
                     </div>
@@ -169,13 +83,13 @@ const BlogPost = (props) => {
                         <p>Share</p>
                         <SocialIcons size = {15}/>
                     </div>
-                    {
-                         //<CommentSection data = {CHOOSES_POST.comments || []} />
-                         <LoginSection
-                            currentPost = {choosenPost.id}
-                         />
-                    }
-                    
+                        <LoginSection 
+                            logoutHandle = {logoutHandle} 
+                            loginHandle = {(authName) => loginHandle(authName)}
+                            userLogged = {userLogged}
+                            username = {user.username}
+                        />
+                        {userLogged ? <CommentSection data = {choosenPost.comments || []} user = {user}/> : ''}
                 </div>
                 <SideColumn/>
             </div>
@@ -183,5 +97,119 @@ const BlogPost = (props) => {
     </Layout>
     )  
 }
+
+const RenderTags = (props) => {
+    const tags = props.tags;
+    const result = tags.map((tag,index) => {
+        return(<Link key = {index} className = "tag" to = {`/app/tagpage/${tag.tag_name}`}>{tag.tag_name}</Link>)
+    });
+
+    return result;
+}
+
+const LoginSection = (props) => {
+    const icons = [
+        {
+            icon: <FaGoogle size = {21} color = "#fff"/>,
+            name: 'google'
+        },
+        {
+            icon: <FaTwitter size = {21} color = "#fff"/>,
+            name: 'twitter'
+        },
+        {
+            icon: <FaFacebook size = {21} color = "#fff"/>,
+            name: 'facebook'
+        }
+    ]
+
+    const logoutHandle = () =>  props.logoutHandle();
+       
+    const loginHandle = (authName) => props.loginHandle(authName);
+
+    if(props.userLogged)
+    {
+        return(
+        <div className = "loginSection">
+            <div className = "formHeader">
+                <h3>Leave Comment</h3>
+                <h4>Your are logged as: <span>{props.username}</span></h4>
+                <button className = "logoutButton" type = "button" onClick = {() => logoutHandle()}>Logout</button>
+            </div>
+        </div> 
+    )}
+
+    return(
+        <div className = "loginSection">
+            <h3>Login by one of below option to leave a comment</h3>
+            <ul>
+                {
+                    icons.map((icon, index) => {
+                        return(
+                        <li key = {index}>
+                            <button className = "loginIcon" onClick = {() => loginHandle(icon.name)}>
+                                {icon.icon}
+                            </button>
+                        </li>)
+                    })
+                }
+            </ul>
+        </div>
+    )
+}
+
+const CommentSection = (props) => {
+    const {user} = props;
+
+    const Comment = (props) => {
+        return(
+            <div className = "comment">
+                <div className = "profilImage">
+                    <img src = "http://localhost:1337/uploads/Blog_83cbe207ae.jpeg" alt = "profile"/>
+                </div>
+                <div className = "contentSection">
+                    <div className = "header">
+                        <h2>{props.author}</h2>
+                        <p>{props.date}</p>
+                    </div>
+                    <div className = "content">
+                        <p>{props.content}</p>
+                    </div>
+                </div>
+            </div> 
+        )
+    }
+
+    return(
+        <div className = "commentSection">
+            <h3>{props.data.length || 0} comments</h3>
+            <ul>
+                {
+                    props?.data.map((comment, index) => {
+                        return(
+                            <li key = {index} className = "commentItem">
+                                <Comment 
+                                    author = {comment.user_name}
+                                    date = {comment.date}
+                                    content = {comment.content}
+                                />
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+            <form>
+                <textarea placeholder = "Your message"></textarea>
+                <input placeholder = "Your name" type = "text" value = {user.username} disabled = {true}/>
+                <input placeholder = "Email" type = "email" value = {user.email} disabled = {true}/>
+                <div className = "buttonWrapper">
+                    <button type = "submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    )
+
+}
+
 
 export default BlogPost;

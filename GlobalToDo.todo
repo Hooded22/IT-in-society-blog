@@ -6,6 +6,12 @@ Side Column:
     Tags:
         ✔ Create tags in starpi @done (16.07.2020, 16:13:21)
         ✔ Show them @done (16.07.2020, 16:13:26)
-    ☐ Responsive Menu
-    ☐ Post image (filter)
-    ☐ Comment section
+    ✔ Responsive Menu @done (17.07.2020, 21:11:06)
+    ✔ Post image (filter) @done (17.07.2020, 21:11:20)
+    ✔ Comment section @done (20.07.2020, 14:50:26)
+    ☐ Adding comments
+    ☐ Share Links
+    ✔ Blog pages @done (20.07.2020, 14:50:49)
+    Login:
+        ✔ After open page with token get token put this to session_variable and link to this same page but without token in http header @done (20.07.2020, 14:50:10)
+    

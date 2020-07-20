@@ -9,7 +9,7 @@ import CategoriesBar from "../components/categoriesBar";
 import {DefaulPostList} from "../components/postsList";
 import SideColumn from "../components/sideColumn";
 
-const IndexPage = () => (
+const IndexPage = (props) => (
   <Layout>
     <SEO title="Home" />
     <AuthorCard/>
@@ -20,7 +20,7 @@ const IndexPage = () => (
       justifyContent: 'space-between',
       alignItems: 'flex-start'
     }}>
-      <DefaulPostList/>
+      <DefaulPostList pageNumber = {props.pageNumber} link = "/app/page/" postsLimit = {3}/>
       <SideColumn/>
     </div>
   </Layout>

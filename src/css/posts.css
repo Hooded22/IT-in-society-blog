@@ -180,6 +180,58 @@
     flex-direction: column;
 }
 
+.postsList .postPages
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.postsList .postPages ul
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: space-around;
+    flex-direction: row;
+    list-style-type: none;
+    width: 100%;
+}
+
+.postsList .postPages ul .item
+{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin:0;
+}
+
+.postsList .postPages ul .item .pageButton
+{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid rgba(22,99,99,0.7);
+    box-sizing: border-box;
+}
+
+.postsList .postPages ul .item .pageButton.active
+{
+    background-color: rgba(22,99,99,0.7);
+    color: white;
+}
+
 @media screen and (max-width: 755px)
 {
     .postsList
@@ -203,5 +255,13 @@
     {
         min-height: 300px;
         margin-top: 20px
+    }
+}
+
+@media screen and (max-width: 514px)
+{
+    .postsList .postPages
+    {
+        width: 100%;
     }
 }

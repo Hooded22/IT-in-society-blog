@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {FiMessageCircle} from 'react-icons/fi';
-import {FaFacebook, FaTwitter, FaPinterest} from 'react-icons/fa';
+import {FaFacebook, FaTwitter, FaPinterest, FaNewspaper} from 'react-icons/fa';
+import {IoIosArrowBack} from "react-icons/io"
 import axios from 'axios';
 
 import {Link} from 'gatsby';
 import "../css/posts.css"
 import SocialIcons from "./socialIcons";
 import {SERVER_ADRESS} from "../env/server_variables.env";
+
 
 
 const icons = [
@@ -26,7 +28,7 @@ const icons = [
 
 function createPostList(postJSON)
     {
-        if(postJSON.data.length == 0 || postJSON == null)
+        if(postJSON.data.length === 0 || postJSON == null)
             return 0;
         const POST_LIST = postJSON?.data;
         const newPostList = [];
@@ -91,7 +93,76 @@ const Post = (props) => {
     )
 }
 
+const PostPagesNavigator = (props) => {
+    const LIMIT = 10;//props.limit
+    const CURRENT_PAGE = props.currentPage;
+    const result = [];
+    const Item = (props) => (
+        <li className = "item" ><Link to = {props.link} className = {props.class} >{props.content}</Link></li>
+    )
+
+    if(CURRENT_PAGE > 1)
+        result.push(
+            <Item 
+            link={props.link+(CURRENT_PAGE-1)} 
+            class="pageButton"
+            title="Go to previous page"
+            content={<IoIosArrowBack/>}
+        />)
+
+    if(LIMIT > CURRENT_PAGE + 3)
+    {
+        console.log("HERE");
+        for(let i = CURRENT_PAGE; i <= CURRENT_PAGE + 2; i++)
+        {
+            const item = <Item 
+                    link={props.link+i}
+                    class={i === CURRENT_PAGE ? "pageButton active" : "pageButton"} 
+                    title={`Go to page ${i}`}
+                    content={i}
+                />
+            result.push(item);
+        }
+        result.push(<li className = "separator">...</li>);
+        result.push(<Item 
+            link={props.link+LIMIT}
+            class="pageButton"
+            title="Go to last page"
+            content={LIMIT}
+        />);
+    }
+    else
+    {
+        console.log(CURRENT_PAGE+3)
+        for(let i = CURRENT_PAGE; i <= LIMIT; i++)
+        {
+            const item = <Item 
+                    link={props.link+i}
+                    class={i === CURRENT_PAGE ? "pageButton active" : "pageButton"} 
+                    title={`Go to page ${i}`}
+                    content={i}
+                />
+            result.push(item);
+        }
+    }
+
+    
+    return(
+        <div className = "postPages">
+            <ul>
+                {
+                    result
+                }  
+            </ul>
+        </div>
+    )
+}
+
 const PostList = (props) => {
+    const PAGE_NUMBER = parseInt(props.pageNumber) <= 0 ? 1 : parseInt(props.pageNumber) || 1;
+    const SHOWED_POST_LIMIT = props.postsLimit - 1;
+    const sliceEnd = SHOWED_POST_LIMIT + PAGE_NUMBER;
+    const sliceStart = PAGE_NUMBER == 1 ? 0 : PAGE_NUMBER + 1
     if(props.data == null)
     {
         return(<h1>No posts.</h1>)
@@ -100,7 +171,7 @@ const PostList = (props) => {
     return(
         <div className = "postsList">
             {
-               posts.map((post,index) => {
+               posts.slice(sliceStart,sliceEnd).map((post,index) => {
                     return(
                         <Post
                             id = {post.id}
@@ -116,11 +187,16 @@ const PostList = (props) => {
                     )
                 })
             }
+            <PostPagesNavigator
+                limit = {posts.length / 4}
+                currentPage = {PAGE_NUMBER}
+                link = {props.link}
+            />
         </div>
     )
 }
 
-const DefaulPostList = () => {
+const DefaulPostList = (props) => {
     const [postList, setPostList] = useState(JSON.parse(localStorage.getItem("posts")) || []);
     useEffect(() => {
         getPosts();
@@ -147,6 +223,9 @@ const DefaulPostList = () => {
     return(
        <PostList
             data = {postList}
+            pageNumber = {props.pageNumber}
+            link = {props.link}
+            postsLimit = {props.postsLimit}
        />
     )
 }

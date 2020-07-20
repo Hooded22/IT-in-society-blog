@@ -32,7 +32,7 @@ const TagPage = (props) => {
             <SEO title={`${props.tagName} tag page`} />
             <PageTemplate
                 header = {<h1>Page of tag {props.tagName}</h1>}
-                content = {<PostsList data = {postList}/>} 
+                content = {<PostsList data = {postList} pageNumber = {props.pageNumber} link = {`/app/tagpage/${props.tagName}/page/`} postsLimit = {3}/>} 
             />
         </Layout>
     )

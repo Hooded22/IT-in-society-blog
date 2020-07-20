@@ -211,8 +211,9 @@
         width: 48%;
         height: 48px;
         padding: 0px 15px;
+        opacity: 0.7;
     }
-    div
+    .buttonWrapper
     {
         @include flexBox(row, flex-end, center);
         width: 100%;
@@ -262,9 +263,39 @@
             border-radius: 50%;
             background-color: $primaryColor;
             margin-right: 30px;
+            border: none;
+            outline: none;
             cursor: pointer;
         }
         
+    }
+    .formHeader
+    {
+        @include flexBox(column, center, flex-start);
+        width: 80%;
+        margin-bottom: 40px;
+        h4
+        {
+            width: 100%;
+            margin-bottom: 10px;
+            font-weight: 300;
+            span
+            {
+                color: rgba(3, 112, 112, 0.9);
+                font-weight: bold;
+            }
+        }
+        button
+        {
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 0;
+            font-size: 14px;
+            color: rgba(3, 112, 112, 0.7);
+            text-transform: uppercase;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
     }
 }
 

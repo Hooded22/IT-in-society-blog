@@ -31,7 +31,8 @@ const Categories = (props) => {
             <SEO title="Categories" />
             <PageTemplate
                 header = {<h1>Hi from the {props.type} page</h1>}
-                content = {<PostsList data = {postList} />}
+                content = {
+                <PostsList data = {postList} pageNumber = {props.pageNumber} link = {`/app/categories/${props.type}/page/`} postsLimit = {3}/>}
             />
         </Layout>
     )
