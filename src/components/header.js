@@ -12,15 +12,15 @@ const pagesList = [
   },
   {
     name: "Stories",
-    link: '/app/categories/stories'
+    link: '/app/categories/Stories'
   },
   {
     name: 'Algo',
-    link: '/app/categories/algorithms'
+    link: '/app/categories/Algorithms'
   },
   {
     name: 'Lifestyle',
-    link: '/app/categories/lifestyle'
+    link: '/app/categories/Lifestyle'
   },
   {
     name: 'About',

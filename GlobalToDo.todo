@@ -9,8 +9,11 @@ Side Column:
     ✔ Responsive Menu @done (17.07.2020, 21:11:06)
     ✔ Post image (filter) @done (17.07.2020, 21:11:20)
     ✔ Comment section @done (20.07.2020, 14:50:26)
-    ☐ Adding comments
+    ✔ Adding comments @done (22.07.2020, 11:26:03)
+    ☐ Comment updating
     ☐ Share Links
+    ☐ Validation email before add
+    ☐ Validate search requests
     ✔ Blog pages @done (20.07.2020, 14:50:49)
     Login:
         ✔ After open page with token get token put this to session_variable and link to this same page but without token in http header @done (20.07.2020, 14:50:10)

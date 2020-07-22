@@ -22,14 +22,14 @@ const NewsLetter = () => {
     async function getToken()
     {
         try {
-            const admin = await axios.post(`${SERVER_ADRESS}/auth/local`,{
+            const { data } = await axios.post(`${SERVER_ADRESS}/auth/local`, {
                 identifier: login,
-                password: password
-            });
-            const token = await admin.data.jwt;
+                password: password,
+              });
+            const token = await data.jwt;
             setStateToken(token);
         } catch (error) {
-            
+            console.log(error);
         }
     }
 
@@ -38,11 +38,23 @@ const NewsLetter = () => {
         event.preventDefault();
         try {
             await getToken();
-            addNewUserEmail();
+            if(validateEmail(String(emailState)))
+            {
+                addNewUserEmail(String(emailState), token, SERVER_ADRESS);
+            }
+            else
+            {
+                alert("Email incorect");
+            }
         } catch (error) {
             console.error(error);
         }
-        
+    }
+
+    function validateEmail(email)
+    {
+        const pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        return pattern.test(email); 
     }
 
     function handleChange(event)
@@ -50,23 +62,24 @@ const NewsLetter = () => {
         setStateEmail(event.target.value);
     }
 
-    async function addNewUserEmail()
+    async function addNewUserEmail(emailContent, token, server_adress)
     {
         try {
-            await fetch(`${SERVER_ADRESS}/emails`,{
+            await fetch(`${server_adress}/emails`,{
                 method: "POST",
                 body:JSON.stringify(
                     {
-                        user_email: emailState
+                        user_email: emailContent
                     }
                 ),
                 headers:
                 {
                     "Authorization": `Bearer ${token}`
                 }
-            }).then(data => console.log(data));
+            }).then(() => alert("Email added"));
             setStateEmail("");
         } catch (error) {
+            alert("Error !",error);
             console.error(error)
         }
     }
@@ -175,10 +188,18 @@ const Search = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if(searchTerm !== "")
+        if(validateSearchTerm(searchTerm))
         {
             navigate(`/app/searchresult/${searchTerm}`)
         }
+        else
+        {
+            alert("Incorent request");
+        }
+    }
+
+    const validateSearchTerm = (text) => {
+        return text != "" && /\w/.test(text);
     }
 
     return (
@@ -195,18 +216,23 @@ const Search = () => {
 }
 
 const LatestPosts = () => {
-    const [postState,setPosts] = useState(JSON.parse(localStorage.getItem('posts')).slice(0,3));
+    const [postState,setPosts] = useState([]);
+    const localStoragePosts = localStorage.getItem('posts');
     useEffect(() => {
-        const localStoragePosts = localStorage.getItem('posts');
-        const postsCopy = [...postState];
-        const DATA = JSON.parse(localStoragePosts);
-        if(DATA !== postsCopy)
-        {
-            const POSTS_TO_SEND = [...DATA].slice(0,3);
-            setPosts(POSTS_TO_SEND);
+        const getPosts = () => {
+            axios.get(`${SERVER_ADRESS}/posts`)
+            .then(posts => setPosts(posts.data))
+            .catch(err => console.error(err))
         }
+
+        if(!localStoragePosts)
+            getPosts();
+        else
+            setPosts(localStoragePosts);
+       
     },[])
 
+    console.log(postState)
 
     const Post = (props) => (
         <Link className = "link" to = {`/app/blogpost/${props.id}`}>
@@ -227,9 +253,9 @@ const LatestPosts = () => {
                        return(
                            <Post
                             id = {post.id}
-                            date = {post.date}
-                            title = {post.title}
-                            image = {post.image}
+                            date = {post.Date}
+                            title = {post.Title}
+                            image = {SERVER_ADRESS + post.Image[0].url}
                             key = {index}
                            />
                        )

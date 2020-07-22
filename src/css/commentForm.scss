@@ -1,0 +1,54 @@
+@import "./variables";
+
+form
+{
+    @mixin basicSetup {
+        background-color: rgb(241, 241, 241);
+        border: none;
+        color: black;
+        font-weight: 100;
+        font-size: 14px;
+        outline: none;
+    }
+    @include flexBox(row, space-between, center);
+    flex-wrap: wrap;
+    width: 100%;
+    textarea
+    {
+        @include basicSetup;
+        height: 170px;
+        resize: none;
+        width: 100%;
+        padding: 10px 15px;
+        
+    }
+    input
+    {
+        @include basicSetup;
+        margin-top: 20px;
+        width: 48%;
+        height: 48px;
+        padding: 0px 15px;
+        opacity: 0.7;
+    }
+    .buttonWrapper
+    {
+        @include flexBox(row, flex-end, center);
+        width: 100%;
+        margin-top: 20px;
+        button
+        {
+            @include flexBox(row, center, center);
+            border: none;
+            outline: none;
+            width: 40%;
+            height: 48px;
+            background-color: rgba(22,99,99,0.8);
+            color: white;
+            font-size: 18px;
+            text-transform: uppercase;
+            text-align: center;
+            font-family: $secondFont;
+        }
+    }
+}

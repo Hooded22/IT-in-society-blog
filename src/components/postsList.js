@@ -1,30 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {FiMessageCircle} from 'react-icons/fi';
-import {FaFacebook, FaTwitter, FaPinterest, FaNewspaper} from 'react-icons/fa';
-import {IoIosArrowBack} from "react-icons/io"
+import {FaFacebook, FaTwitter, FaPinterest} from 'react-icons/fa';
 import axios from 'axios';
 
-import {Link} from 'gatsby';
+import {Link, navigate} from 'gatsby';
 import "../css/posts.css"
 import SocialIcons from "./socialIcons";
-import {SERVER_ADRESS} from "../env/server_variables.env";
+import {SERVER_ADRESS, LOCAL_ADRESS} from "../env/server_variables.env";
 
+import ContentPagesNavigator from "../components/contentPagesNavigator"
 
-
-const icons = [
-    {
-        icon: <FaFacebook className = "linkedin" size = {16} color = {"#000"} />,
-        link: "https://www.linkedin.com/in/przemyslaw-sipta/"
-    },
-    {
-        icon: <FaTwitter className = "instagram" size = {16} color = {"#000"} />,
-        link: "https://www.instagram.com/hooded_alberchi/"
-    },
-    {
-        icon: <FaPinterest className = "github" size = {16} color = {"#000"} />,
-        link: "https://github.com/Hooded22"
-    }
-]
 
 function createPostList(postJSON)
     {
@@ -53,6 +38,22 @@ function createPostList(postJSON)
 const Post = (props) => {
     const linkDestination = `/app/blogpost/${props.id}`
     const linkStyle = {color: "black", textDecoration: "none"}
+
+    const icons = [
+        {
+            icon: <FaFacebook className = "linkedin" size = {16} color = {"#000"} />,
+            link: `https://www.facebook.com/sharer.php?u=${LOCAL_ADRESS}/app/blogpost/${props.id}&t=${props.title}`
+        },
+        {
+            icon: <FaTwitter className = "instagram" size = {16} color = {"#000"} />,
+            link: "https://www.instagram.com/home/"
+        },
+        {
+            icon: <FaPinterest className = "github" size = {16} color = {"#000"} />,
+            link: `https://pl.pinterest.com/pin/create/button/?url=${LOCAL_ADRESS}/app/blogpost/${props.id}/&description=${props.title}`
+        }
+    ]
+
     return(
         <div className = {props.reverse ? "post postReverse" : "post"}  >
                 <Link className = "imageSection" to = {linkDestination} >
@@ -66,7 +67,7 @@ const Post = (props) => {
                             <h3>{props.date}</h3>
                         </div>
                         <div className = "content">
-                            <p>{props.short_content}</p>
+                            {props.short_content}
                             <i>...</i>
                         </div>
                     </Link>
@@ -93,81 +94,27 @@ const Post = (props) => {
     )
 }
 
-const PostPagesNavigator = (props) => {
-    const LIMIT = 10;//props.limit
-    const CURRENT_PAGE = props.currentPage;
-    const result = [];
-    const Item = (props) => (
-        <li className = "item" ><Link to = {props.link} className = {props.class} >{props.content}</Link></li>
-    )
 
-    if(CURRENT_PAGE > 1)
-        result.push(
-            <Item 
-            link={props.link+(CURRENT_PAGE-1)} 
-            class="pageButton"
-            title="Go to previous page"
-            content={<IoIosArrowBack/>}
-        />)
 
-    if(LIMIT > CURRENT_PAGE + 3)
-    {
-        console.log("HERE");
-        for(let i = CURRENT_PAGE; i <= CURRENT_PAGE + 2; i++)
-        {
-            const item = <Item 
-                    link={props.link+i}
-                    class={i === CURRENT_PAGE ? "pageButton active" : "pageButton"} 
-                    title={`Go to page ${i}`}
-                    content={i}
-                />
-            result.push(item);
-        }
-        result.push(<li className = "separator">...</li>);
-        result.push(<Item 
-            link={props.link+LIMIT}
-            class="pageButton"
-            title="Go to last page"
-            content={LIMIT}
-        />);
-    }
-    else
-    {
-        console.log(CURRENT_PAGE+3)
-        for(let i = CURRENT_PAGE; i <= LIMIT; i++)
-        {
-            const item = <Item 
-                    link={props.link+i}
-                    class={i === CURRENT_PAGE ? "pageButton active" : "pageButton"} 
-                    title={`Go to page ${i}`}
-                    content={i}
-                />
-            result.push(item);
-        }
-    }
-
-    
-    return(
-        <div className = "postPages">
-            <ul>
-                {
-                    result
-                }  
-            </ul>
-        </div>
-    )
-}
+const StringToHtml = (string) => <div  dangerouslySetInnerHTML={{__html: string}}/>
 
 const PostList = (props) => {
     const PAGE_NUMBER = parseInt(props.pageNumber) <= 0 ? 1 : parseInt(props.pageNumber) || 1;
     const SHOWED_POST_LIMIT = props.postsLimit - 1;
     const sliceEnd = SHOWED_POST_LIMIT + PAGE_NUMBER;
     const sliceStart = PAGE_NUMBER == 1 ? 0 : PAGE_NUMBER + 1
-    if(props.data == null)
+    const posts = props.data;
+
+
+    const Item = (props) => (
+        <li className = "item"><button onClick = {() => navigate(props.link)} className = {props.class} >{props.content}</button></li>
+    )
+
+    if(!posts)
     {
         return(<h1>No posts.</h1>)
     }
-    const posts = props.data;
+
     return(
         <div className = "postsList">
             {
@@ -177,7 +124,7 @@ const PostList = (props) => {
                             id = {post.id}
                             key = {post.id}
                             title = {post.title}
-                            short_content = {post.short_content}
+                            short_content = {StringToHtml(post.short_content)}
                             image = {post.image}
                             date = {post.date}
                             category = {post.category}
@@ -187,11 +134,16 @@ const PostList = (props) => {
                     )
                 })
             }
-            <PostPagesNavigator
-                limit = {posts.length / 4}
-                currentPage = {PAGE_NUMBER}
-                link = {props.link}
-            />
+            <div className = "postPages">
+                <ul>
+                    <ContentPagesNavigator
+                        limit = {Math.ceil(posts.length / 4)}
+                        currentPage = {PAGE_NUMBER}
+                        link = {props.link}
+                        item = {Item}
+                    />
+                </ul>
+            </div>
         </div>
     )
 }
@@ -206,7 +158,7 @@ const DefaulPostList = (props) => {
     {
         try 
         {
-            const jsonData = await axios.get(`http://localhost:1337/posts`);
+            const jsonData = await axios.get(`${SERVER_ADRESS}/posts`);
             const newPostList = createPostList(jsonData);
             if(newPostList !== postList)
             {

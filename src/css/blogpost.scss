@@ -19,8 +19,9 @@
 .blogpost .singlePost
 {
     width: 100%;
-    min-height: 1000px;
+    min-height: 100px;
     position: relative;
+    @include flexBox(column, flex-start,center);
     .header
     {
         @include flexBox(column, center, center);
@@ -36,11 +37,13 @@
             font-size: 15px;
             text-transform: uppercase;
             color: $primaryColor;
+            text-align: center;
         }
         h1
         {
             @include marginPaddingZero;
             font-size: 32px;
+            text-align: center;
         }
         h3
         {
@@ -67,7 +70,7 @@
         width: 100%;
         display: flex;
         border-bottom: 2px solid rgba(000,000,000,0.13);
-        position: absolute;
+        position: relative;
         bottom: 0;
         ul
         {
@@ -129,6 +132,7 @@
         {
             @include marginPaddingZero;
             width: 100%;
+            margin-bottom: 35px;
         }
     }
 }
@@ -136,7 +140,6 @@
 .commentSection ul li .comment
 {
     @include flexBox(row, space-around, flex-start);
-    margin-bottom: 35px;
     border-bottom: 2px solid rgba(000,000,000,0.13);
     .profilImage
     {
@@ -177,68 +180,70 @@
         .content
         {
             min-height: 100px;
-            margin-top: 10px
+            margin-top: 10px;
+        }
+        .actionButtonsContainer
+        {
+            width: 20%;
+            display: flex;
+            justify-content: space-around;
+            .actionButton
+            {
+                @include marginPaddingZero;
+                border: none;
+                margin-bottom: 2px;
+                outline: none;
+                background: none;
+                color: #000;
+                text-transform: uppercase;
+                font-size: 18px;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                cursor: pointer;
+            }
         }
     }
 }
 
-.commentSection form
+.commentSection .commentNavigation
 {
-    @mixin basicSetup {
-        background-color: rgb(241, 241, 241);
-        border: none;
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 35px;
+    .pageButton
+    {
+        width: 20px;
+        height: 20px;
+        background-color: transparent;
+        text-align: center;
         color: black;
-        font-weight: 100;
+        text-decoration: none;
         font-size: 14px;
-        outline: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 50%;
+        margin: 0 10px;
     }
-    @include flexBox(row, space-between, center);
-    flex-wrap: wrap;
-    width: 100%;
-    textarea
+    .pageButton.active
     {
-        @include basicSetup;
-        height: 170px;
-        resize: none;
-        width: 100%;
-        padding: 10px 15px;
-        
+        background-color: rgba(22,99,99,0.7);
+        color: white;
     }
-    input
-    {
-        @include basicSetup;
-        margin-top: 20px;
-        width: 48%;
-        height: 48px;
-        padding: 0px 15px;
-        opacity: 0.7;
-    }
-    .buttonWrapper
-    {
-        @include flexBox(row, flex-end, center);
-        width: 100%;
-        margin-top: 20px;
-        button
-        {
-            @include flexBox(row, center, center);
-            border: none;
-            outline: none;
-            width: 40%;
-            height: 48px;
-            background-color: rgba(22,99,99,0.8);
-            color: white;
-            font-size: 18px;
-            text-transform: uppercase;
-            text-align: center;
-            font-family: $secondFont;
-        }
-    }
+
 }
+
+
 
 .postColumn .loginSection
 {
     @include flexBox(column, center, flex-start);
     width: 100%;
+    margin-bottom: 40px;
     h3
     {
         width: 60%;
@@ -346,5 +351,18 @@
     .postColumn .loginSection ul .loginIcon
     {
         margin-right: 0;
+    }
+
+    .commentSection ul li .comment .contentSection 
+    {
+        .content{
+            min-height: 50px;
+        }
+
+        .actionButtonsContainer
+        {
+            width: 100%;
+            font-size: 12px;
+        }
     }
 }

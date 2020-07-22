@@ -7,6 +7,7 @@ import TagPage from "../modules/tagPage";
 import SearchResult from "../modules/searchResult";
 import LoginSuccessfull from "../modules/loginSuccessfull";
 import IndexPage from "../pages/index";
+import UpdateComment from "../modules/updateComment"
 
 const App = () => {
     return(
@@ -20,6 +21,7 @@ const App = () => {
             <SearchResult path = "/app/searchresult/:searchTerm/page/:pageNumber" />
             <SearchResult path = "/app/searchresult/:searchTerm" />
             <LoginSuccessfull path = "/app/auth/loginSuccessfull" />
+            <UpdateComment path ="/app/updatecomment/:commentId/:email/:username/:previousPostId/:token" />
         </Router>
     )
 }

@@ -35,7 +35,8 @@ const SocialIcons = (props) => {
         link: {
             textDecoration: "none",
             color: "black",
-            cursor: "pointer"
+            cursor: "pointer",
+            pointerEvents: "all"
         }
     
     }

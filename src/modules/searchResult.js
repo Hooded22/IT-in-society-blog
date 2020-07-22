@@ -8,8 +8,8 @@ import {SERVER_ADRESS} from "../env/server_variables.env";
 import PageTemplate from "../components/pageTemplates/headerAndContent"
 
 const EmptySearchResult = (props) => (
-    <div>
-        <p>No result for "{props.searchTerm}"</p>
+    <div style = {{width: "65%"}}>
+        <p style = {{width: "100%", textAlign: "center"}}>No result for "{props.searchTerm}"</p>
     </div>
 )
 
