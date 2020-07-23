@@ -44,6 +44,10 @@
             font-weight: normal;
             color: $primaryColor
         }
+        .container
+        {
+            width: 40%;
+        }
     }
     .socialIconBar
     {
@@ -133,6 +137,18 @@
         {
             width: 100%;
             margin-bottom: 5px;
+        }
+    }
+
+    .authorCard
+    {
+        width: 90%;
+        .rigthSide
+        {
+            .container
+            {
+                width: 100%;
+            }
         }
     }
 }

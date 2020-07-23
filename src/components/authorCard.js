@@ -16,7 +16,7 @@ const AuthorCard = (props) => {
         <SocialIcons
           size = {21}
           color = "#000"
-          width = "40%"
+          width = "none"
         />
       </div>
     </div>

@@ -155,7 +155,7 @@ const PostList = (props) => {
 }
 
 const DefaulPostList = (props) => {
-    const [postList, setPostList] = useState(JSON.parse(localStorage.getItem("posts")) || []);
+    const [postList, setPostList] = useState([]);
     useEffect(() => {
         getPosts();
     },[])
