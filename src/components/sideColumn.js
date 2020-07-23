@@ -10,6 +10,8 @@ import {Link, navigate} from 'gatsby';
 
 import "../css/sideColumn.css"
 
+const windowGlobal = typeof window !== 'undefined' && window
+
 
 const NewsLetter = () => {
     const [token, setStateToken] = useState("");
@@ -128,6 +130,8 @@ const Categories = () => {
         return bigLetter + string.slice(1);
     }
 
+    
+
     return(
     <div className = "categories wrapper">
         <h1>Kategorie</h1>
@@ -217,7 +221,6 @@ const Search = () => {
 
 const LatestPosts = () => {
     const [postState,setPosts] = useState([]);
-    const localStoragePosts = localStorage.getItem('posts');
     useEffect(() => {
         const getPosts = () => {
             axios.get(`${SERVER_ADRESS}/posts`)
@@ -225,10 +228,7 @@ const LatestPosts = () => {
             .catch(err => console.error(err))
         }
 
-        if(!localStoragePosts)
-            getPosts();
-        else
-            setPosts(localStoragePosts);
+        getPosts();
        
     },[])
 
