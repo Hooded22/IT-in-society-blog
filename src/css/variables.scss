@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Romanesco&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Josefin+Sans:wght@500&family=Roboto+Condensed:wght@700&family=Yrsa&display=swap');
 @mixin flexBox($direction, $justifyCon, $alignItems, $display : flex, ) {
     display: $display;
     flex-direction: $direction;
@@ -14,3 +14,6 @@ $primaryColor : #166363;
 $directionMobile : column;
 $headerSize : 36px;
 $secondFont : 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+$contentFont_1 : 'Yrsa';
+$headerFont_1 : 'IBM Plex Mono';
+$headerFont_2 : 'Josefin Sans';

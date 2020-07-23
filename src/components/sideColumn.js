@@ -130,7 +130,7 @@ const Categories = () => {
 
     return(
     <div className = "categories wrapper">
-        <h1>Categories</h1>
+        <h1>Kategorie</h1>
         <ul>
            {
                categorieState.map((item) => {
@@ -170,7 +170,7 @@ const Tags = () => {
     } 
     return(
         <div className = "tags wrapper">
-            <h1>Tags</h1>
+            <h1>Tagi</h1>
             <ul>
                <RenderTagList/>
             </ul>
@@ -199,12 +199,12 @@ const Search = () => {
     }
 
     const validateSearchTerm = (text) => {
-        return text != "" && /\w/.test(text);
+        return text !== "" && /\w/.test(text);
     }
 
     return (
         <div className = "search wrapper">
-            <h1>Search</h1>
+            <h1>Wyszukiwarka</h1>
             <div>
                 <input type = "text" placeholder = "Search..." value = {searchTerm} onChange = {handleChange} />
                 <button className = "iconBox wrapper" type = "submit" onClick = {handleSubmit}>
@@ -246,7 +246,7 @@ const LatestPosts = () => {
 
     return(
         <div className = "latestPosts wrapper">
-            <h1>Latest posts</h1>
+            <h1>Ostatnio posty</h1>
             <ul>
                {
                    postState.map((post,index) => {
@@ -255,7 +255,7 @@ const LatestPosts = () => {
                             id = {post.id}
                             date = {post.Date}
                             title = {post.Title}
-                            image = {SERVER_ADRESS + post.Image[0].url}
+                            image = {post.Image[0].url}
                             key = {index}
                            />
                        )
@@ -275,7 +275,7 @@ const SideColumn = (props) => {
             <Search/>
             <LatestPosts/>
             <div className = "socialIcons wrapper">
-                <h1>Social media</h1>
+                <h1>Znajdź mnie na</h1>
                 <SocialIcons
                     color = "#000"
                     size = {21}

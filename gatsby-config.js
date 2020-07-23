@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Blog`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `IT in society`,
+    description: `Informatyk w społeczeństwie to wielki tygiel, w którym znajdziecie opowiadania, naukę algorytów, języków programowania wiele więcej.`,
+    author: `Przemyslaw Sipta`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

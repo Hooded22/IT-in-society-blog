@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {SERVER_ADRESS} from "../env/server_variables.env"
 import axios from 'axios';
-import { Link, navigate } from 'gatsby';
+import { navigate } from 'gatsby';
 import {FaTrash, FaEdit} from "react-icons/fa"
 import ContentPagesNavigator from "../components/contentPagesNavigator";
 
@@ -16,7 +16,7 @@ const CommentSection = (props) => {
 
     const SHOWED_POST_LIMIT = 3;
     const sliceEnd = SHOWED_POST_LIMIT + page;
-    const sliceStart = page == 1 ? 0 : page + 1
+    const sliceStart = page === 1 ? 0 : page + 1
 
     const navigateToPage = (page) => {
         setPage(page);
@@ -35,7 +35,7 @@ const CommentSection = (props) => {
 
     return(
         <div className = "commentSection">
-            <h3>{comments.length || 0} comments</h3>
+            <h3>{comments.length || 0} komentarzy</h3>
             <ul>
                 {
                     comments.slice(sliceStart,sliceEnd).map((comment, index) => {
@@ -120,7 +120,7 @@ const Comment = (props) => {
                     <p>{content}</p>
                 </div>
                 {
-                    user?.id == commentOwner 
+                    user?.id === commentOwner 
                     ? <div className = "actionButtonsContainer">
                         <button 
                             className = "actionButton" 
@@ -156,7 +156,7 @@ const Form = (props) => {
     const createComment = (event) => {
         event.preventDefault();
         const date = getDate();
-        if(commentText != "")
+        if(commentText !== "")
         {
             const comment = buildComment(String(commentText), user, date, postId);
                 postComment(comment, token);
@@ -211,11 +211,17 @@ const Form = (props) => {
 
     return(
         <form onSubmit = {createComment}>
-            <textarea placeholder = "Your message" onChange = {textAreaHandler} value = {commentText}></textarea>
-            <input placeholder = "Your name" type = "text" value = {user.username} disabled = {true}/>
-            <input placeholder = "Email" type = "email" value = {user.email} disabled = {true}/>
+            <label htmlFor="message" className="textareLabel">
+                <textarea placeholder = "Your message" onChange = {textAreaHandler} value = {commentText} name = "message" id = "message"></textarea>
+            </label>
+            <label htmlFor="username" className="inputLabel">
+                <input placeholder = "Your name" name="username" id="username" type = "text" value = {user.username} disabled = {true}/>
+            </label>
+            <label htmlFor="email" className="inputLabel">
+                <input placeholder = "Email" type = "email" id = "email" name = "email" value = {user.email} disabled = {true}/>
+            </label>
             <div className = "buttonWrapper">
-                <button type = "button" onClick = {createComment}>Submit</button>
+                <button type = "button" onClick = {createComment}>Wyślij</button>
             </div>
         </form>
     )

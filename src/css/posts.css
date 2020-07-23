@@ -13,6 +13,7 @@
 {
     width: 100%;
     min-height: 328px;
+    max-height: 328px;
     display: flex;
     flex-direction: row;
     align-content: flex-start;
@@ -153,17 +154,17 @@
 
 .postsList .post .footer .share
 {
-    width: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .postsList .post .footer .share h4
 {
     margin-bottom: 0;
     text-align: right;
-    width: 20%;
     margin: 0;
     display: inline-flex;
-    margin-left: 40%;
 }
 
 .postsList .postReverse
@@ -234,6 +235,12 @@
 
 @media screen and (max-width: 755px)
 {
+
+    .post
+    {
+        max-height: none;
+    }
+
     .postsList
     {
         width: 100%;

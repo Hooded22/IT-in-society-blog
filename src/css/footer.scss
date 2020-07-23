@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Romanesco&display=swap');
+@import "./variables.scss";
 
 .footer
 {
@@ -33,17 +33,18 @@
 
 .footer .bottom .onTopButton
 {
-    font-family: Romanesco;
-    font-size: 30px;
+    font-family: $headerFont_2;
+    font-size: 24px;
     line-height: 35px;
     padding: 10px 0;
     text-decoration: none;
     color: black;
     text-align: center;
+    font-style: italic;
     cursor: pointer;
 }
 
-.footer .bottom h6
+.footer .bottom h1
 {
     padding: 15px;
     font-size: 12px;

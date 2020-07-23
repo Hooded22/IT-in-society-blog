@@ -2,22 +2,27 @@ import React from "react"
 import {
   FaLinkedin,
   FaInstagram,
-  FaGithub
+  FaGithub,
+  FaFacebook
 } from 'react-icons/fa'
 
 const SocialIcons = (props) => {
 
     const socialIconList = [
         {
-            icon: <FaLinkedin className = "linkedin" size = {props.size} color = {props.color} />,
+            icon: <FaLinkedin title = "linkedin" className = "linkedin" size = {props.size} color = {props.color} />,
             link: "https://www.linkedin.com/in/przemyslaw-sipta/"
         },
         {
-            icon: <FaInstagram className = "instagram" size = {props.size} color = {props.color} />,
+            icon: <FaInstagram title = "instagram" className = "instagram" size = {props.size} color = {props.color} />,
             link: "https://www.instagram.com/hooded_alberchi/"
         },
         {
-            icon: <FaGithub className = "github" size = {props.size} color = {props.color} />,
+            icon: <FaFacebook title = "facebook" className = "facebook" size = {props.size} color = {props.color} />,
+            link: "https://www.facebook.com/przemek.sipta/"
+        },
+        {
+            icon: <FaGithub title = "github" className = "github" size = {props.size} color = {props.color} />,
             link: "https://github.com/Hooded22"
         }
     ]

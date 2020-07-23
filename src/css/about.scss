@@ -1,0 +1,51 @@
+@import "./variables.scss";
+
+.aboutMe{
+    @include flexBox(column, center, center);
+    width: 65%;
+    .bioWrapper
+    {
+        .gatsby-image-wrapper
+        {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            float: left;
+            position: relative; 
+            overflow: hidden; 
+            shape-outside: circle(); 
+            margin: 20px;
+        }
+        .bioSection
+        {
+            text-align: justify;
+            h1
+            {
+                margin-top: 15px;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 600px)
+{
+    .aboutMe
+    {
+        .bioWrapper
+        {
+            .gatsby-image-wrapper
+            {
+                float: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 775px)
+{
+    .aboutMe
+    {
+        width: 100%;
+    }
+}

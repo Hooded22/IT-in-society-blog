@@ -58,6 +58,7 @@ const ContentPagesNavigator = (props) => {
                     title={`Go to page ${i}`}
                     content={i}
                     itemMethod = {itemMethod}
+                    key = {i}
                 />
             result.push(item);
         }

@@ -14,6 +14,7 @@ import SEO from "../components/seo";
 import SideColumn from "../components/sideColumn";
 import LoginSection from "../components/loginSection";
 import CommentSection from "../components/commentSection";
+import Loader from "../components/loader";
 
 const BlogPost = (props) => {
     const [userLogged, setUserLogged] = useState(window.sessionStorage.getItem('userLogged') ? true : false);
@@ -39,22 +40,29 @@ const BlogPost = (props) => {
 
     const icons = [
         {
-            icon: <FaFacebook className = "linkedin" size = {16} color = {"#000"} />,
-            link: `https://www.facebook.com/sharer.php?u=${LOCAL_ADRESS}/app/blogpost/${choosenPost?.id}&t=${choosenPost?.Title}`
+            icon: <FaFacebook className = "facebook" size = {16} color = {"#000"} title = "facebook"/>,
+            link: `https://www.facebook.com/sharer.php?u=${LOCAL_ADRESS}/app/blogpost/${choosenPost?.id}&t=${choosenPost?.Title}`,
+            name: "facebook"
         },
         {
-            icon: <FaTwitter className = "instagram" size = {16} color = {"#000"} />,
-            link: "https://www.instagram.com/home/"
+            icon: <FaTwitter className = "twitter" size = {16} color = {"#000"}   title = "twitter"/>,
+            link: "https://www.instagram.com/home/",
+            name: "twitter"
         },
         {
-            icon: <FaPinterest className = "github" size = {16} color = {"#000"} />,
-            link: `https://pl.pinterest.com/pin/create/button/?url=${LOCAL_ADRESS}/app/blogpost/${choosenPost?.id}/&description=${choosenPost?.Title}`
+            icon: <FaPinterest className = "pinterest" size = {16} color = {"#000"}  title= "pinterest"/>,
+            link: `https://pl.pinterest.com/pin/create/button/?url=${LOCAL_ADRESS}/app/blogpost/${choosenPost?.id}/&description=${choosenPost?.Title}`,
+            name: "pinterest"
         }
     ]
 
     if(choosenPost == null)
     return(
-        <h1>Activity indicator here</h1>
+        <Layout>
+            <Loader
+                text = "Page is loading..."
+            />
+        </Layout>
     )
 
     return(
@@ -65,12 +73,14 @@ const BlogPost = (props) => {
                 <div className = "postColumn">
                     <div className = "singlePost">
                         <div className = "header">
-                            <h2>{choosenPost.category.category_name || ""}</h2>
+                            <h2>{choosenPost.category?.category_name || ""}</h2>
                             <h1>{choosenPost.Title}</h1>
                             <h3>{choosenPost.Date}</h3>
                         </div>
                         <div className = "content">
-                            <img src = {SERVER_ADRESS + choosenPost.Image[0].url} alt = "Blogpost"/>
+                            <div className = "imageWrapper">
+                                <img src = {choosenPost.Image[0].url} alt = "Blogpost"/>
+                            </div>
                             {StringToHtml(choosenPost.Content)}
                         </div>
                         <div className = "footer">
@@ -80,7 +90,7 @@ const BlogPost = (props) => {
                         </div>
                     </div>
                     <div className = "share">
-                        <p>Share</p>
+                        <p>Udostępnij</p>
                         <SocialIcons size = {15} data = {icons}/>
                     </div>
                         <LoginSection 

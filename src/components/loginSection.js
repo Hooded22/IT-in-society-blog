@@ -39,8 +39,8 @@ const LoginSection = (props) => {
         return(
         <div className = "loginSection">
             <div className = "formHeader">
-                <h3>Leave Comment</h3>
-                <h4>Your are logged as: <span>{props.username}</span></h4>
+                <h3>Zostaw komentarz</h3>
+                <h4>Jesteś zalogowany jako: <span>{props.username}</span></h4>
                 <button className = "logoutButton" type = "button" onClick = {() => logoutHandle(setUserLogged)}>Logout</button>
             </div>
         </div> 
@@ -48,7 +48,7 @@ const LoginSection = (props) => {
 
     return(
         <div className = "loginSection">
-            <h3>Login by one of below option to leave a comment</h3>
+            <h3>Zaloguj się aby dodawać komentarze.</h3>
             <ul>
                 {
                     icons.map((icon, index) => {

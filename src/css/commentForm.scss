@@ -1,5 +1,10 @@
 @import "./variables";
 
+.updateComment
+{
+    width: 65%;
+}
+
 form
 {
     @mixin basicSetup {
@@ -13,23 +18,33 @@ form
     @include flexBox(row, space-between, center);
     flex-wrap: wrap;
     width: 100%;
-    textarea
+    .textareLabel
     {
-        @include basicSetup;
-        height: 170px;
-        resize: none;
         width: 100%;
-        padding: 10px 15px;
-        
+        textarea
+        {
+            @include basicSetup;
+            height: 170px;
+            resize: none;
+            width: 100%;
+            padding: 10px 15px;
+            
+        }
     }
-    input
+    .inputLabel
     {
-        @include basicSetup;
-        margin-top: 20px;
         width: 48%;
         height: 48px;
-        padding: 0px 15px;
-        opacity: 0.7;
+        margin-top: 20px;
+        input
+        {
+            @include basicSetup;
+            padding: 0px 15px;
+            opacity: 0.7;
+            height: 100%;
+            width: 100%;
+            
+        }
     }
     .buttonWrapper
     {
@@ -43,12 +58,20 @@ form
             outline: none;
             width: 40%;
             height: 48px;
-            background-color: rgba(22,99,99,0.8);
+            background-color: rgba(22,99,99,1);
             color: white;
             font-size: 18px;
             text-transform: uppercase;
             text-align: center;
             font-family: $secondFont;
         }
+    }
+}
+
+@media screen and (max-width: 755px)
+{
+    .updateComment
+    {
+        width: 100%;
     }
 }

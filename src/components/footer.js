@@ -3,7 +3,7 @@ import {Link} from 'gatsby';
 
 import SocialIcons from "./socialIcons";
 
-import "../css/footer.css";
+import "../css/footer.scss";
 
 const Footer = () => {
     return(
@@ -17,11 +17,11 @@ const Footer = () => {
             </div>
             <div className = "bottom">
                 <Link className = "onTopButton" to = "#">
-                    On top
+                    Na górę
                 </Link>
-                <h6>
+                <h1>
                     Copyright 2020.
-                </h6>
+                </h1>
             </div>
         </div>
     )

@@ -25,7 +25,8 @@ function createPostList(postJSON)
                 content: post.Content,
                 date: post.Date,
                 category:  post.category?.category_name,
-                image:  SERVER_ADRESS + post.Image[0].url,
+                image:  post.Image[0].url,
+                alt: post.Image[0].alt,
                 tags: post.tags,
                 comments: post.comments
             }
@@ -57,7 +58,7 @@ const Post = (props) => {
     return(
         <div className = {props.reverse ? "post postReverse" : "post"}  >
                 <Link className = "imageSection" to = {linkDestination} >
-                    <img src = {props.image} alt = "Post"/>
+                    <img src = {props.image} loading = "lazy" alt = {props.alt} />
                 </Link>
                 <div className = {props.reverse ? "contentSection contentSectionReverse" : "contentSection"}>
                     <Link to = {linkDestination} style = {linkStyle}>
@@ -77,7 +78,7 @@ const Post = (props) => {
                             <p>{props.comments}</p>
                         </div>
                         <div className = "share">
-                            <h4>Share</h4>
+                            <h4>Udostępnij</h4>
                             <SocialIcons
                                 data = {icons}
                                 style = {{
@@ -102,7 +103,7 @@ const PostList = (props) => {
     const PAGE_NUMBER = parseInt(props.pageNumber) <= 0 ? 1 : parseInt(props.pageNumber) || 1;
     const SHOWED_POST_LIMIT = props.postsLimit - 1;
     const sliceEnd = SHOWED_POST_LIMIT + PAGE_NUMBER;
-    const sliceStart = PAGE_NUMBER == 1 ? 0 : PAGE_NUMBER + 1
+    const sliceStart = PAGE_NUMBER === 1 ? 0 : PAGE_NUMBER + 1
     const posts = props.data;
 
 
@@ -112,7 +113,11 @@ const PostList = (props) => {
 
     if(!posts)
     {
-        return(<h1>No posts.</h1>)
+        return(
+            <div style = {{width: "65%"}}>
+                <p style = {{width: "100%", textAlign: "center"}}>Nie znaleziono żadnych postów.</p>
+            </div>
+        )
     }
 
     return(
@@ -130,6 +135,7 @@ const PostList = (props) => {
                             category = {post.category}
                             comments = {1}
                             reverse = {index % 2 === 0 ? true : false}
+                            alt = {post.alt}
                         />
                     )
                 })

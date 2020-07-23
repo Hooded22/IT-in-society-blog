@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, navigate} from 'gatsby';
 import axios from 'axios';
 
-import {SERVER_ADRESS,SERVER_URL} from "../env/server_variables.env";
+import {SERVER_URL} from "../env/server_variables.env";
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -29,7 +29,7 @@ const LoginSuccessfull = () => {
             }
         }
 
-        if(token != "")
+        if(token !== "")
             getUserData(token);
         else
             setMessage("Authorization failed")

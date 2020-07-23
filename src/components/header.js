@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import {RiMenu4Line, RiCloseLine} from "react-icons/ri"
 
-import '../css/navbar.css';
+import '../css/navbar.scss';
 
 const pagesList = [
   {
@@ -24,7 +24,7 @@ const pagesList = [
   },
   {
     name: 'About',
-    link: 'about'
+    link: '/about'
   }
 ]
 

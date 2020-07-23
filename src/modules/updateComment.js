@@ -19,7 +19,7 @@ const UpdateComment = (props) => {
             <PageTemplate
                 header = {<h1>Update post</h1>}
                 content = {
-                   <div style = {{width:"65%"}}>
+                   <div className = "updateComment">
                         <Form
                             backToPreviousSide = {() => backToPreviousSide(previousPostId)}
                             commentId = {commentId}
@@ -45,7 +45,7 @@ const Form = (props) => {
     const createComment = (event) => {
         event.preventDefault();
         const date = getDate();
-        if(commentText == "")
+        if(commentText === "")
             alert("Comment cannot be empty")
         else
             updateComment(commentText, date, token, commentId);
@@ -82,11 +82,17 @@ const Form = (props) => {
     }
     return(
         <form onSubmit = {createComment}>
-            <textarea placeholder = "Your message" onChange = {textAreaHandler} value = {commentText}></textarea>
-            <input placeholder = "Your name" type = "text" value = {commentUserName} disabled = {true}/>
-            <input placeholder = "Email" type = "email" value = {commentEmail} disabled = {true}/>
+            <label htmlFor="message" className="textareLabel">
+                <textarea placeholder = "Your message" onChange = {textAreaHandler} value = {commentText} name = "message" id = "message"></textarea>
+            </label>
+            <label htmlFor="username" className="inputLabel">
+                <input placeholder = "Your name" name="username" id="username" type = "text" value = {commentUserName} disabled = {true}/>
+            </label>
+            <label htmlFor="email" className="inputLabel">
+                <input placeholder = "Email" type = "email" id = "email" name = "email" value = {commentEmail} disabled = {true}/>
+            </label>
             <div className = "buttonWrapper">
-                <button type = "button" onClick = {createComment}>Update</button>
+                <button type = "button" onClick = {createComment}>Wyślij</button>
             </div>
         </form>
     )
