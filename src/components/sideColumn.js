@@ -246,7 +246,7 @@ const LatestPosts = () => {
 
     return(
         <div className = "latestPosts wrapper">
-            <h1>Ostatnio posty</h1>
+            <h1>Najnowsze posty</h1>
             <ul>
                {
                    postState.map((post,index) => {

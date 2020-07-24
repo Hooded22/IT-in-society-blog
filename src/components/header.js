@@ -59,7 +59,9 @@ const Header = ({ siteTitle }) => {
   return(
   <header className = "headerContainer">
     <div className = "leftSide">
-      <img src={logo} />
+      <Link className = "logo" to="/">
+        <img src={logo} />
+      </Link>
       <h1 style={{ margin: 0,}}>
         <Link
           to="/"

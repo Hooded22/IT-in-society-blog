@@ -12,7 +12,7 @@ const AuthorCard = (props) => {
       <div className = "rigthSide">
         <h1>Miło Cię tu widzieć !</h1>
         <h2>ITense znany również jako IT In Society to furtka do świata baśni, czarów, programistycznych arkanów i dobrej zabawy. Ja nazywam się Przemek i witam Cię serdecznie. <span role="img" title=";)">😉</span></h2>
-        <h3>Obseruj mnie na</h3>
+        <h3>Obserwuj mnie na</h3>
         <SocialIcons
           size = {21}
           color = "#000"

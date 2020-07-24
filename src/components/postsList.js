@@ -16,6 +16,7 @@ function createPostList(postJSON)
         if(postJSON.data.length === 0 || postJSON == null)
             return 0;
         const POST_LIST = postJSON?.data;
+        console.log(POST_LIST);
         const newPostList = [];
         POST_LIST.map(post => {
             let postObject = {

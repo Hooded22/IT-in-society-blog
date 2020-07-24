@@ -23,7 +23,7 @@ const SocialIcons = (props) => {
         },
         {
             icon: <FaGithub title = "github" className = "github" size = {props.size} color = {props.color} />,
-            link: "https://github.com/Hooded22"
+            link: "https://github.com/Hooded22/IT-in-society-blog"
         }
     ]
 
