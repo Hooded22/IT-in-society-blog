@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `IT in society`,
+    title: `ITense`,
     description: `Informatyk w społeczeństwie to wielki tygiel, w którym znajdziecie opowiadania, naukę algorytów, języków programowania wiele więcej.`,
     author: `Przemyslaw Sipta`,
   },

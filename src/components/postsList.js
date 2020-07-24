@@ -68,14 +68,14 @@ const Post = (props) => {
                             <h3>{props.date}</h3>
                         </div>
                         <div className = "content">
-                            {props.short_content}
+                            <p>{props.short_content}</p>
                             <i>...</i>
                         </div>
                     </Link>
                     <div className = "footer">
                         <div className = "comments">
                             <FiMessageCircle/>
-                            <p>{props.comments}</p>
+                            <p>{props.comments.length}</p>
                         </div>
                         <div className = "share">
                             <h4>Udostępnij</h4>
@@ -96,8 +96,6 @@ const Post = (props) => {
 }
 
 
-
-const StringToHtml = (string) => <div  dangerouslySetInnerHTML={{__html: string}}/>
 
 const PostList = (props) => {
     const PAGE_NUMBER = parseInt(props.pageNumber) <= 0 ? 1 : parseInt(props.pageNumber) || 1;
@@ -129,11 +127,11 @@ const PostList = (props) => {
                             id = {post.id}
                             key = {post.id}
                             title = {post.title}
-                            short_content = {StringToHtml(post.short_content)}
+                            short_content = {post.short_content}
                             image = {post.image}
                             date = {post.date}
                             category = {post.category}
-                            comments = {1}
+                            comments = {post.comments}
                             reverse = {index % 2 === 0 ? true : false}
                             alt = {post.alt}
                         />

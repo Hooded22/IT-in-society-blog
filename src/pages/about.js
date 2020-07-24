@@ -30,7 +30,7 @@ const AboutMe = () => {
         <Layout>
             <SEO title = "About me"/>
                 <PageTemplate
-                    header = {<h1>Hello</h1>}
+                    header = {""}
                     content = {<Content/>}
                 />
         </Layout>

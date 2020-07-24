@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import {RiMenu4Line, RiCloseLine} from "react-icons/ri"
+import Image from "../components/image";
+import logo from "../images/Logo2.svg";
 
 import '../css/navbar.scss';
 
@@ -53,9 +55,11 @@ const Header = ({ siteTitle }) => {
     setMobileMenuContentClass("");
   }
 
+
   return(
   <header className = "headerContainer">
     <div className = "leftSide">
+      <img src={logo} />
       <h1 style={{ margin: 0,}}>
         <Link
           to="/"
