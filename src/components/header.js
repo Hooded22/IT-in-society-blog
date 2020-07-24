@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import {RiMenu4Line, RiCloseLine} from "react-icons/ri"
 import Image from "../components/image";
-import logo from "../images/Logo2.svg";
+import logo from "../images/Logo3.svg";
 
 import '../css/navbar.scss';
 

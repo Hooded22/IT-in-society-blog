@@ -21,8 +21,8 @@
     justify-content: center;
     img
     {
-        width: 120px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
     }
     h1
     {
@@ -31,7 +31,9 @@
         font-family: $headerFont_2;
         font-weight: normal;
         align-items: center;
+        justify-content: flex-end;
         display: flex;
+        width: 100px;
     }
     .blogTitle
     {
@@ -205,18 +207,20 @@
     .leftSide
     {
         flex-direction: column;
+        align-items: center;
         img
         {
             margin-bottom: 5px;
-            width: 100px;
+            width: 60px;
             height: 60px;
         }
         h1
         {
             width: 100px;
-            height: 20px;
+            height: 100px;
             font-size: 18px;
             justify-content: center;
+            align-items: flex-start;
         }
     }
 
