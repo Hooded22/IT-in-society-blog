@@ -11,7 +11,7 @@ const AuthorCard = (props) => {
       </div>
       <div className = "rigthSide">
         <h1>Miło Cię tu widzieć !</h1>
-        <h2>Niezmiernie miło mi jest powitać Cię na moim blogu. Ja nazywam się Przemek i mam nadzieję że to skromne miejsce stanie się dla Ciebie furtką na nieznany do tej pory świat. <span role="img" aria-label=";)">😉</span></h2>
+        <h2>ITense znany również jako IT In Society to furtka do świata baśni, czarów, programistycznych arkanów i dobrej zabawy. Ja nazywam się Przemek i witam Cię serdecznie. <span role="img" title=";)">😉</span></h2>
         <h3>Obseruj mnie na</h3>
         <SocialIcons
           size = {21}
